@@ -26,9 +26,14 @@ const classTitle = document
   )
   ?.textContent?.match(/^\w*\.\d*/)[0];
 
+// Get class ID from URL
+const classID = window.location.href.match(/\d{6}/)[0];
+
+// Construct class object
 const classObj = {
   title: classTitle,
   url: window.location.href,
+  id: classID,
 };
 
 // Create custom nav bar
@@ -40,28 +45,33 @@ const logoElement = document.createElement("img");
 logoElement.src = chrome.extension.getURL("/images/get_started128.png");
 navPlus.appendChild(logoElement);
 
-// Add add button
-const addButton = document.createElement("button");
-addButton.className = "mcp-add-button";
-addButton.textContent = `+ ${classTitle}`;
-
-// Save class when add button is clicked
-addButton.onclick = () => {
-  chrome.storage.sync.get(["savedClasses"], (result) => {
+// Add "save class" button if not already saved
+chrome.storage.sync.get(["savedClasses"], (result) => {
+  if (!result.savedClasses.find((c) => c.id === classID)) {
     const { savedClasses } = result;
-    if (!savedClasses) {
-      // No saved classes array
-      chrome.storage.sync.set({ savedClasses: [classObj] });
-      return;
-    } else if (!savedClasses.find((c) => c.title === classTitle)) {
-      // This class hasn't been saved
-      chrome.storage.sync.set({ savedClasses: [...savedClasses, classObj] });
-    }
-  });
-};
 
-// Inject add button
-classTitle && navPlus.appendChild(addButton);
+    // Create button
+    const saveClassButton = document.createElement("button");
+    saveClassButton.className = "mcp-add-button";
+    saveClassButton.textContent = `+ ${classTitle}`;
+
+    // Save class when button is clicked
+    saveClassButton.onclick = () => {
+      if (!savedClasses) {
+        // No saved classes array
+        chrome.storage.sync.set({ savedClasses: [classObj] });
+      } else if (!savedClasses.find((c) => c.title === classTitle)) {
+        // This class hasn't been saved
+        chrome.storage.sync.set({
+          savedClasses: [...savedClasses, classObj],
+        });
+      }
+    };
+
+    // Inject "save class" button
+    classTitle && navPlus.appendChild(saveClassButton);
+  }
+});
 
 function createDropdownLink(name) {
   const newDropdownLink = document.createElement("a");
