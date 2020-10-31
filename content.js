@@ -65,6 +65,12 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
         chrome.storage.sync.set({
           savedClasses: [...savedClasses, classObj],
         });
+
+        // Refresh page
+        location.reload();
+
+        // StackOverflow said to return false if refreshing in onClick
+        return false;
       }
     };
 

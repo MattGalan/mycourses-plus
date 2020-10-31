@@ -55,13 +55,13 @@
   display: none;
   position: absolute;
   left: -16px;
-  z-index: 1;
+  z-index: 10;
 }
 
 .mcp-class-dropdown-content {
   display: flex;
   flex-flow: column nowrap;
-  margin-top: 12px;
+  margin-top: 8px;
   padding: 16px 16px 0 16px;
   background: linear-gradient(to bottom, white, #f9fbff);
   border: 1px solid #e3e9f1;
