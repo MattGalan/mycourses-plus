@@ -70,6 +70,8 @@
 
 .mcp-class-dropdown-content a {
   font-weight: normal;
+  color: #494c4e;
+  text-decoration: none;
   margin: 0 16px 16px 16px;
 }
 

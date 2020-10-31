@@ -35,9 +35,10 @@ const logoElement = document.createElement("img");
 logoElement.src = chrome.extension.getURL("/images/get_started128.png");
 navPlus.appendChild(logoElement);
 
-function createDropdownLink(name) {
+function createDropdownLink(name, href) {
   const newDropdownLink = document.createElement("a");
   newDropdownLink.textContent = name;
+  newDropdownLink.href = href;
   return newDropdownLink;
 }
 
@@ -58,10 +59,30 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     const newDropdownContent = document.createElement("div");
     newDropdownContent.className = "mcp-class-dropdown-content";
 
-    newDropdownContent.appendChild(createDropdownLink("Content"));
-    newDropdownContent.appendChild(createDropdownLink("Assignments"));
-    newDropdownContent.appendChild(createDropdownLink("Quizzes"));
-    newDropdownContent.appendChild(createDropdownLink("Grades"));
+    newDropdownContent.appendChild(
+      createDropdownLink(
+        "Content",
+        `https://mycourses.rit.edu/d2l/le/content/${curClass.id}/Home`
+      )
+    );
+    newDropdownContent.appendChild(
+      createDropdownLink(
+        "Assignments",
+        `https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list.d2l?ou=${curClass.id}&isprv=0`
+      )
+    );
+    newDropdownContent.appendChild(
+      createDropdownLink(
+        "Quizzes",
+        `https://mycourses.rit.edu/d2l/lms/quizzing/user/quizzes_list.d2l?ou=${curClass.id}`
+      )
+    );
+    newDropdownContent.appendChild(
+      createDropdownLink(
+        "Grades",
+        `https://mycourses.rit.edu/d2l/lms/grades/my_grades/main.d2l?ou=${curClass.id}`
+      )
+    );
 
     newUnsaveButton = document.createElement("button");
     newUnsaveButton.textContent = "Remove from quick bar";
