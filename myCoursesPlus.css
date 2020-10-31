@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.mcp-nav-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  border-top: 1px solid rgba(124, 134, 149, 0.18);
+}
+
+.mycourses-plus-nav {
+  max-width: 1230px;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: bold;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 8px 30px;
+}
+
+.mycourses-plus-nav img {
+  height: 1em;
+}
+
+.mcp-add-button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  outline: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #e3e9f1;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #f9fbff);
+  border-radius: 0.4rem;
+  font-family: "Lato", sans-serif;
+}
+
+.mcp-class-link {
+  font-weight: normal;
+  margin-left: 30px;
+  color: #494c4e;
+  text-decoration: none;
+}
