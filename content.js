@@ -26,16 +26,6 @@ const classTitle = document
   )
   ?.textContent?.match(/^\w*\.\d*/)[0];
 
-// Get class ID from URL
-const classID = window.location.href.match(/\d{6}/)[0];
-
-// Construct class object
-const classObj = {
-  title: classTitle,
-  url: window.location.href,
-  id: classID,
-};
-
 // Create custom nav bar
 const navPlus = document.createElement("div");
 navPlus.className = "mycourses-plus-nav";
@@ -93,10 +83,28 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
   });
 });
 
+// Get class ID from URL
+let classID;
+const urlMatches = location.href.match(/\d{6}/);
+if (urlMatches?.length === 1) {
+  // Only found one 6 digit number, so we know it's the class ID
+  classID = urlMatches[0];
+} else if (urlMatches?.length > 1) {
+  // Found multiple 6 digit numbers, so we need to be more specific
+  classID = location.href.match(/ou=(\d{6})/)[1];
+}
+
 // Add "save class" button if not already saved
 chrome.storage.sync.get(["savedClasses"], (result) => {
   if (!result.savedClasses.find((c) => c.id === classID)) {
     const { savedClasses } = result;
+
+    // Construct class object
+    const classObj = {
+      title: classTitle,
+      url: window.location.href,
+      id: classID,
+    };
 
     // Create button
     const saveClassButton = document.createElement("button");
