@@ -34,9 +34,43 @@
   font-family: "Lato", sans-serif;
 }
 
-.mcp-class-link {
-  font-weight: normal;
+.mcp-class {
+  position: relative;
+  display: inline-block;
   margin-left: 30px;
+}
+
+.mcp-class:hover .mcp-class-dropdown {
+  display: flex;
+}
+
+.mcp-class-link {
+  display: block;
+  font-weight: normal;
   color: #494c4e;
   text-decoration: none;
 }
+
+.mcp-class-dropdown {
+  display: none;
+  position: absolute;
+  left: -16px;
+  z-index: 1;
+}
+
+.mcp-class-dropdown-content {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 12px;
+  padding: 16px 16px 0 16px;
+  background: linear-gradient(to bottom, white, #f9fbff);
+  border: 1px solid #e3e9f1;
+  border-radius: 0.4rem;
+  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.1);
+}
+
+.mcp-class-dropdown a {
+  font-weight: normal;
+  margin-bottom: 16px;
+}
+

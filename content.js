@@ -63,14 +63,38 @@ addButton.onclick = () => {
 // Inject add button
 classTitle && navPlus.appendChild(addButton);
 
+function createDropdownLink(name) {
+  const newDropdownLink = document.createElement("a");
+  newDropdownLink.textContent = name;
+  return newDropdownLink;
+}
+
 // Inject class quick links
 chrome.storage.sync.get(["savedClasses"], (result) => {
   result.savedClasses.forEach((c) => {
+    const newClass = document.createElement("div");
+    newClass.className = "mcp-class";
+
     const newLink = document.createElement("a");
     newLink.textContent = c.title;
     newLink.href = c.url;
     newLink.className = "mcp-class-link";
-    navPlus.appendChild(newLink);
+
+    newDropdown = document.createElement("div");
+    newDropdown.className = "mcp-class-dropdown";
+
+    const newDropdownContent = document.createElement("div");
+    newDropdownContent.className = "mcp-class-dropdown-content";
+
+    newDropdownContent.appendChild(createDropdownLink("Content"));
+    newDropdownContent.appendChild(createDropdownLink("Assignments"));
+    newDropdownContent.appendChild(createDropdownLink("Quizzes"));
+    newDropdownContent.appendChild(createDropdownLink("Grades"));
+
+    newDropdown.appendChild(newDropdownContent);
+    newClass.appendChild(newLink);
+    newClass.appendChild(newDropdown);
+    navPlus.appendChild(newClass);
   });
 });
 
