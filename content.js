@@ -45,6 +45,54 @@ const logoElement = document.createElement("img");
 logoElement.src = chrome.extension.getURL("/images/get_started128.png");
 navPlus.appendChild(logoElement);
 
+function createDropdownLink(name) {
+  const newDropdownLink = document.createElement("a");
+  newDropdownLink.textContent = name;
+  return newDropdownLink;
+}
+
+// Inject class quick links
+chrome.storage.sync.get(["savedClasses"], (result) => {
+  result.savedClasses.forEach((curClass) => {
+    const newClass = document.createElement("div");
+    newClass.className = "mcp-class";
+
+    const newLink = document.createElement("a");
+    newLink.textContent = curClass.title;
+    newLink.href = curClass.url;
+    newLink.className = "mcp-class-link";
+
+    newDropdown = document.createElement("div");
+    newDropdown.className = "mcp-class-dropdown";
+
+    const newDropdownContent = document.createElement("div");
+    newDropdownContent.className = "mcp-class-dropdown-content";
+
+    newDropdownContent.appendChild(createDropdownLink("Content"));
+    newDropdownContent.appendChild(createDropdownLink("Assignments"));
+    newDropdownContent.appendChild(createDropdownLink("Quizzes"));
+    newDropdownContent.appendChild(createDropdownLink("Grades"));
+
+    newUnsaveButton = document.createElement("button");
+    newUnsaveButton.textContent = "Remove from quick bar";
+    newUnsaveButton.onclick = () => {
+      chrome.storage.sync.set({
+        savedClasses: result.savedClasses.filter(
+          (saved) => saved.id !== curClass.id
+        ),
+      });
+      location.reload();
+      return false;
+    };
+    newDropdownContent.appendChild(newUnsaveButton);
+
+    newDropdown.appendChild(newDropdownContent);
+    newClass.appendChild(newLink);
+    newClass.appendChild(newDropdown);
+    navPlus.appendChild(newClass);
+  });
+});
+
 // Add "save class" button if not already saved
 chrome.storage.sync.get(["savedClasses"], (result) => {
   if (!result.savedClasses.find((c) => c.id === classID)) {
@@ -53,7 +101,7 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     // Create button
     const saveClassButton = document.createElement("button");
     saveClassButton.className = "mcp-add-button";
-    saveClassButton.textContent = `+ ${classTitle}`;
+    saveClassButton.textContent = `Add ${classTitle} to quick bar`;
 
     // Save class when button is clicked
     saveClassButton.onclick = () => {
@@ -68,8 +116,6 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
 
         // Refresh page
         location.reload();
-
-        // StackOverflow said to return false if refreshing in onClick
         return false;
       }
     };
@@ -77,41 +123,6 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     // Inject "save class" button
     classTitle && navPlus.appendChild(saveClassButton);
   }
-});
-
-function createDropdownLink(name) {
-  const newDropdownLink = document.createElement("a");
-  newDropdownLink.textContent = name;
-  return newDropdownLink;
-}
-
-// Inject class quick links
-chrome.storage.sync.get(["savedClasses"], (result) => {
-  result.savedClasses.forEach((c) => {
-    const newClass = document.createElement("div");
-    newClass.className = "mcp-class";
-
-    const newLink = document.createElement("a");
-    newLink.textContent = c.title;
-    newLink.href = c.url;
-    newLink.className = "mcp-class-link";
-
-    newDropdown = document.createElement("div");
-    newDropdown.className = "mcp-class-dropdown";
-
-    const newDropdownContent = document.createElement("div");
-    newDropdownContent.className = "mcp-class-dropdown-content";
-
-    newDropdownContent.appendChild(createDropdownLink("Content"));
-    newDropdownContent.appendChild(createDropdownLink("Assignments"));
-    newDropdownContent.appendChild(createDropdownLink("Quizzes"));
-    newDropdownContent.appendChild(createDropdownLink("Grades"));
-
-    newDropdown.appendChild(newDropdownContent);
-    newClass.appendChild(newLink);
-    newClass.appendChild(newDropdown);
-    navPlus.appendChild(newClass);
-  });
 });
 
 // Put navPlus in a container so it lines up with the real nav
