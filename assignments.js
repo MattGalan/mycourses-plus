@@ -42,12 +42,34 @@ assignments.forEach((assignment, index) => {
 // Remove the yucky myCourses table
 $("#d_content_r_p").remove();
 
-function deadlineHeaderClicked() {
-  sortByDate();
+let sortType = null;
+let reverseSort = false;
+
+function nameHeaderClicked() {
+  headerClicked("name", (a, b) => a.name.localeCompare(b.name));
 }
 
-function sortByDate() {
-  assignments.sort((a, b) => a.dateObj - b.dateObj);
+function submissionsHeaderClicked() {
+  headerClicked("submissions", (a, b) =>
+    a.submission.localeCompare(b.submission)
+  );
+}
+
+function deadlineHeaderClicked() {
+  headerClicked("deadline", (a, b) => a.dateObj - b.dateObj);
+}
+
+function headerClicked(type, sortFn) {
+  if (sortType === type) {
+    reverseSort = !reverseSort;
+  } else {
+    sortType = type;
+    reverseSort = false;
+  }
+
+  assignments.sort(sortFn);
+  reverseSort && assignments.reverse();
+
   renderTable();
 }
 
@@ -59,13 +81,17 @@ function renderTable() {
   $("#d_content_r_c2").append(`
     <table class="mcp-assignments">
       <tr>
-        <th onclick="helloWorld()">Name</th>
-        <th>Submissions</th>
-        <th id="mcp-deadline-header">Deadline</th>
+        <th id="mcp-name-header">Name</th>
+        <th id="mcp-submissions-header">Submissions</th>
+        <th id="mcp-deadline-header">Deadline<span class="mcp-sort-arrow"/>
+        </th>
       </tr>
     </table>
   `);
 
+  // Add click handlers to table headers
+  $("#mcp-name-header").click(nameHeaderClicked);
+  $("#mcp-submissions-header").click(submissionsHeaderClicked);
   $("#mcp-deadline-header").click(deadlineHeaderClicked);
 
   // Populate table
