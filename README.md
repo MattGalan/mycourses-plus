@@ -4,7 +4,7 @@ myCourses Plus is a **work in progress** browser extension enhancement suite for
 
 ## Installation
 
-myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project a work in progress. Fortunately, it's easy to install unofficial extensions:
+myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project is still a work in progress. Fortunately, it's easy to install unofficial extensions:
 
 1. Either download this repo's `.zip` and unzip or clone with `git clone https://github.com/MatthewGalan/mycourses-plus.git`
 
