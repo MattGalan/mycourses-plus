@@ -65,7 +65,7 @@
   background: linear-gradient(to bottom, white, #f9fbff);
   border: 1px solid #e3e9f1;
   border-radius: 0.4rem;
-  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .mcp-class-dropdown-content a {
@@ -84,10 +84,36 @@
   cursor: pointer;
 }
 
+.mcp-assignments {
+  width: 100%;
+}
+
+.mcp-assignments th,
+.mcp-assignments td {
+  border: 1px solid #cdd5dc;
+  padding: 16px;
+}
+
+.mcp-assignments td a {
+  color: #006fbf;
+}
+
+.mcp-assignments th {
+  background: #f9fbff;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+}
+
 .mcp-sort-arrow {
-  width: 0; 
-  height: 0; 
+  display: inline-block;
+  margin: 0 0 4px 8px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid black;
+}
+
+.mcp-sort-arrow.reverse {
+  border-top: none;
+  border-bottom: 8px solid black;
 }

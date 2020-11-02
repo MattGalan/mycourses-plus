@@ -73,6 +73,17 @@ function headerClicked(type, sortFn) {
   renderTable();
 }
 
+function renderTableHeader(name) {
+  lowerCaseName = name.toLowerCase();
+
+  const arrow =
+    sortType === lowerCaseName
+      ? `<div class="mcp-sort-arrow${reverseSort ? " reverse" : ""}"></div>`
+      : "";
+
+  return `<th id="mcp-${lowerCaseName}-header">${name}${arrow}</th>`;
+}
+
 function renderTable() {
   // Remove existing MCP table
   $(".mcp-assignments").remove();
@@ -81,9 +92,9 @@ function renderTable() {
   $("#d_content_r_c2").append(`
     <table class="mcp-assignments">
       <tr>
-        <th id="mcp-name-header">Name</th>
-        <th id="mcp-submissions-header">Submissions</th>
-        <th id="mcp-deadline-header">Deadline<span class="mcp-sort-arrow"/>
+        ${renderTableHeader("Name")}
+        ${renderTableHeader("Submissions")}
+        ${renderTableHeader("Deadline")}
         </th>
       </tr>
     </table>
