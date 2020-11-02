@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["https://mycourses.rit.edu/*"],
-      "js": ["content.js"],
+      "js": ["content.js", "quickbar.js"],
       "css": ["myCoursesPlus.css"]
     }
   ],
