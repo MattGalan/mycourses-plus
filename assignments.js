@@ -36,37 +36,50 @@ assignments.forEach((assignment, index) => {
   assignment.submission = submission.textContent;
   assignment.submissionHistoryHref = scrapeHref(submission);
   assignment.deadline = deadline.textContent;
+  assignment.dateObj = new Date(deadline.textContent);
 });
 
 // Remove the yucky myCourses table
 $("#d_content_r_p").remove();
 
 function deadlineHeaderClicked() {
-  console.log("name");
+  sortByDate();
 }
 
-// Create new table
-$("#d_content_r_c2").append(`
-  <table class="mcp-assignments">
-    <tr>
-      <th onclick="helloWorld()">Name</th>
-      <th>Submissions</th>
-      <th id="mcp-deadline-header">Deadline</th>
-    </tr>
-  </table>
-`);
+function sortByDate() {
+  assignments.sort((a, b) => a.dateObj - b.dateObj);
+  renderTable();
+}
 
-$("#mcp-deadline-header").click(deadlineHeaderClicked);
+function renderTable() {
+  // Remove existing MCP table
+  $(".mcp-assignments").remove();
 
-// Populate table
-assignments.forEach((a) =>
-  $(".mcp-assignments").append(`
+  // Create new table
+  $("#d_content_r_c2").append(`
+    <table class="mcp-assignments">
+      <tr>
+        <th onclick="helloWorld()">Name</th>
+        <th>Submissions</th>
+        <th id="mcp-deadline-header">Deadline</th>
+      </tr>
+    </table>
+  `);
+
+  $("#mcp-deadline-header").click(deadlineHeaderClicked);
+
+  // Populate table
+  assignments.forEach((a) =>
+    $(".mcp-assignments").append(`
     <tr>
       <td><a href=${a.descriptionHref}>${a.name}</a></td>
       <td><a href=${a.submissionHistoryHref}>${a.submission}</a></td>
       <td>${a.deadline}</td>
     </tr>
   `)
-);
+  );
+}
+
+renderTable();
 
 console.log(assignments);
