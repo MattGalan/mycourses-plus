@@ -55,6 +55,19 @@ function submissionsHeaderClicked() {
   );
 }
 
+// using localeCompare here results in the -/x entries in the wrong place
+function scoreHeaderClicked() {
+  headerClicked("score", (a, b) => {
+    const aScoreSplit = a.score.split("/");
+    const aNumerator = aScoreSplit[0].trim() === "-" ?  0 : aScoreSplit[0].trim(); //count -/x entries as 0
+
+    const bScoreSplit = b.score.split("/");
+    const bNumerator = bScoreSplit[0].trim() === "-" ? 0 : bScoreSplit[0].trim();
+
+    return bNumerator/bScoreSplit[1].trim() - aNumerator/aScoreSplit[1].trim();
+  });
+}
+
 function deadlineHeaderClicked() {
   headerClicked("deadline", (a, b) => a.dateObj - b.dateObj);
 }
@@ -94,6 +107,7 @@ function renderTable() {
       <tr>
         ${renderTableHeader("Name")}
         ${renderTableHeader("Submissions")}
+        ${renderTableHeader("Score")}
         ${renderTableHeader("Deadline")}
         </th>
       </tr>
@@ -103,6 +117,7 @@ function renderTable() {
   // Add click handlers to table headers
   $("#mcp-name-header").click(nameHeaderClicked);
   $("#mcp-submissions-header").click(submissionsHeaderClicked);
+  $("#mcp-score-header").click(scoreHeaderClicked);
   $("#mcp-deadline-header").click(deadlineHeaderClicked);
 
   // Populate table
@@ -111,6 +126,7 @@ function renderTable() {
     <tr>
       <td><a href=${a.descriptionHref}>${a.name}</a></td>
       <td><a href=${a.submissionHistoryHref}>${a.submission}</a></td>
+      <td>${a.score}</td>
       <td>${a.deadline}</td>
     </tr>
   `)
