@@ -61,7 +61,6 @@
   display: flex;
   flex-flow: column nowrap;
   margin-top: 8px;
-  padding-top: 16px;
   background: linear-gradient(to bottom, white, #f9fbff);
   border: 1px solid #e3e9f1;
   border-radius: 0.4rem;
@@ -72,7 +71,16 @@
   font-weight: normal;
   color: #494c4e;
   text-decoration: none;
-  margin: 0 16px 16px 16px;
+  padding: 8px 12px;
+}
+
+.mcp-class-dropdown-content a:first-child {
+  padding-top: 12px;
+  border-radius: 0.4rem 0.4rem 0 0;
+}
+
+.mcp-class-dropdown-content a:hover {
+  background: #eeeeee;
 }
 
 .mcp-class-dropdown-content button {
