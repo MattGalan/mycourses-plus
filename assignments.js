@@ -22,6 +22,11 @@ $(".dco.d2l-grades-score").each(function (index) {
   assignments[index].score = cleanedScore;
 });
 
+// Scrape feedback links
+$("#z_b > tbody > tr > td:nth-child(4)").each(function (index) {
+  assignments[index].feedbackHref = scrapeHref(this);
+});
+
 // Scrape submission statuses and deadlines
 const submissionsAndDeadlines = [];
 $(".d_gn.d_gc.d_gt").each(function () {
@@ -59,12 +64,16 @@ function submissionsHeaderClicked() {
 function scoreHeaderClicked() {
   headerClicked("score", (a, b) => {
     const aScoreSplit = a.score.split("/");
-    const aNumerator = aScoreSplit[0].trim() === "-" ?  0 : aScoreSplit[0].trim(); //count -/x entries as 0
+    const aNumerator =
+      aScoreSplit[0].trim() === "-" ? 0 : aScoreSplit[0].trim(); //count -/x entries as 0
 
     const bScoreSplit = b.score.split("/");
-    const bNumerator = bScoreSplit[0].trim() === "-" ? 0 : bScoreSplit[0].trim();
+    const bNumerator =
+      bScoreSplit[0].trim() === "-" ? 0 : bScoreSplit[0].trim();
 
-    return bNumerator/bScoreSplit[1].trim() - aNumerator/aScoreSplit[1].trim();
+    return (
+      bNumerator / bScoreSplit[1].trim() - aNumerator / aScoreSplit[1].trim()
+    );
   });
 }
 
@@ -97,6 +106,12 @@ function renderTableHeader(name) {
   return `<th id="mcp-${lowerCaseName}-header">${name}${arrow}</th>`;
 }
 
+// Returns a table cell with a link if href exists, and a span if not
+function renderLink(text, href) {
+  const contents = href ? `<a href=${href}>${text}</>` : `<span>${text}</span>`;
+  return `<td>${contents}</td>`;
+}
+
 function renderTable() {
   // Remove existing MCP table
   $(".mcp-assignments").remove();
@@ -124,9 +139,9 @@ function renderTable() {
   assignments.forEach((a) =>
     $(".mcp-assignments").append(`
     <tr>
-      <td><a href=${a.descriptionHref}>${a.name}</a></td>
-      <td><a href=${a.submissionHistoryHref}>${a.submission}</a></td>
-      <td>${a.score}</td>
+      ${renderLink(a.name, a.descriptionHref)}
+      ${renderLink(a.submission, a.submissionHistoryHref)}
+      ${renderLink(a.score, a.feedbackHref)}
       <td>${a.deadline}</td>
     </tr>
   `)
