@@ -40,7 +40,11 @@ myCourses Plus is not yet available on the Chrome Web Store, as publishing can t
 
 ## 🔨 Contribution
 
-Contributions are welcome and encouraged! To begin contributing, clone the repo and install the extension using the steps above. Check the issues board for things to do, or work on something completely new! Make a pull request and I'll get to it ASAP. For questions, feedback, or discussion, please message me on the [SSE Slack](https://rit-sse.rit.edu) [@MattGalan](https://rit-sse.slack.com/archives/DCV03A5QU) or email me at matthewgalan1@gmail.com. Thank you!
+Contributions are welcome and encouraged! To begin contributing, clone the repo and install the extension using the steps above. You'll need to click the little refresh icon on the Chrome extensions page to see your changes.
+
+Check the issues board for things to do, or work on something completely new! Make a pull request and I'll get to it ASAP.
+
+For questions, feedback, or discussion, please message me on the [SSE Slack](https://rit-sse.rit.edu) [@MattGalan](https://rit-sse.slack.com/archives/DCV03A5QU) or email me at matthewgalan1@gmail.com. Thank you!
 
 ## 🌟 Feedback
 
