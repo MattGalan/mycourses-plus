@@ -91,37 +91,3 @@
   width: max-content;
   cursor: pointer;
 }
-
-.mcp-assignments {
-  width: 100%;
-}
-
-.mcp-assignments th,
-.mcp-assignments td {
-  border: 1px solid #cdd5dc;
-  padding: 16px;
-}
-
-.mcp-assignments td a {
-  color: #006fbf;
-}
-
-.mcp-assignments th {
-  background: #f9fbff;
-  cursor: pointer;
-  text-align: left;
-  user-select: none;
-}
-
-.mcp-sort-arrow {
-  display: inline-block;
-  margin: 0 0 4px 8px;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid black;
-}
-
-.mcp-sort-arrow.reverse {
-  border-top: none;
-  border-bottom: 8px solid black;
-}
