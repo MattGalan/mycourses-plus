@@ -2,6 +2,28 @@
 
 myCourses Plus is a **work in progress** browser extension enhancement suite for RIT's myCourses.
 
+## 🍖 Features
+
+myCourses Plus is packed with features to streamline your workflows and enhance your experience. All features will be configurable in the future. Screenshots coming soon!
+
+<details>
+    <summary><b>Hide useless panels</b></summary>
+    </br>
+    Several useless panels are hidden on the home page, including the "Locker / Help" bar, "User Links" panel, and "Instructions to Find Your Courses" panel.
+</details>
+
+<details>
+    <summary><b>Quick navigation bar</b></summary>
+    </br>
+    Jump from the assignments page for one class to the grades page for another class in a single click.
+</details>
+
+<details>
+    <summary><b>New assignments table</b></summary>
+    </br>
+    The assignments table has been overhauled to allow you to sort by name, submission status, and due date.
+</details>
+
 ## 💻 Installation
 
 myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project is still a work in progress. Fortunately, it's easy to install unofficial extensions:
