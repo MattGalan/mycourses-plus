@@ -1,0 +1,23 @@
+/* These are miscellaneous stylings to strip away some
+of the cruft on the calendar widget on the home page. */
+
+.d2l-collapsepane-content {
+  border: none !important;
+}
+
+.d2l-datalist-item-content .d2l-inline:first-child {
+  margin-left: 12px !important;
+}
+
+.d2l-datalist-item-content .d2l-inline:nth-child(2) {
+  width: 75% !important;
+}
+
+.homepage-col-4 .d2l-homepage-heading-link .d2l-heading.vui-heading-4 {
+  margin: 20px 0 0 20px;
+}
+
+.homepage-col-4 .d2l-widget-content-padding {
+  padding: 0;
+  margin-top: -20px;
+}

@@ -16,7 +16,8 @@
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/home"],
-      "js": ["hide_useless/homepage.js"]
+      "js": ["hide_useless/homepage.js", "calendar.js"],
+      "css": ["calendar.css"]
     },
     {
       "matches": [
