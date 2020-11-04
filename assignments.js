@@ -15,11 +15,19 @@ $(".d_ich").each(function () {
 });
 
 // Scrape scores
-$(".dco.d2l-grades-score").each(function (index) {
-  const rawScore = this.textContent;
-  // For some reason there's a " - " at the end of every score, so we'll remove that
-  const cleanedScore = rawScore.substring(0, rawScore.length - 3);
-  assignments[index].score = cleanedScore;
+$(".dco.d2l-grades-score > div.dco_c").each(function (index) {
+  const labels = $(this).children("label");
+  let scoreObject = {};
+
+  if(this.textContent.includes("%")) {
+    scoreObject.cleanedScore = this.textContent;
+  } else {
+    scoreObject.cleanedScore = this.textContent.substring(0, this.textContent.length - 3);
+  }
+
+  scoreObject.numerator = labels[0].textContent;
+  scoreObject.denominator = labels[2].textContent;
+  assignments[index].score = scoreObject;
 });
 
 // Scrape feedback links
@@ -60,20 +68,12 @@ function submissionsHeaderClicked() {
   );
 }
 
-// using localeCompare here results in the -/x entries in the wrong place
+// using localeCompare on text here results in the unscored entries in the wrong place
 function scoreHeaderClicked() {
   headerClicked("score", (a, b) => {
-    const aScoreSplit = a.score.split("/");
-    const aNumerator =
-      aScoreSplit[0].trim() === "-" ? 0 : aScoreSplit[0].trim(); //count -/x entries as 0
-
-    const bScoreSplit = b.score.split("/");
-    const bNumerator =
-      bScoreSplit[0].trim() === "-" ? 0 : bScoreSplit[0].trim();
-
-    return (
-      bNumerator / bScoreSplit[1].trim() - aNumerator / aScoreSplit[1].trim()
-    );
+    const aNumerator = a.score.numerator === "-" ? 0 : a.score.numerator;
+    const bNumerator = b.score.numerator === "-" ? 0 : b.score.numerator;
+    return bNumerator / b.score.denominator - aNumerator / a.score.denominator;
   });
 }
 
@@ -141,7 +141,7 @@ function renderTable() {
     <tr>
       ${renderLink(a.name, a.descriptionHref)}
       ${renderLink(a.submission, a.submissionHistoryHref)}
-      ${renderLink(a.score, a.feedbackHref)}
+      ${renderLink(a.score.cleanedScore, a.feedbackHref)}
       <td>${a.deadline}</td>
     </tr>
   `)
