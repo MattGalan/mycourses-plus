@@ -24,6 +24,18 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
     The assignments table has been overhauled to allow you to sort by name, submission status, and due date.
 </details>
 
+<details>
+    <summary><b>Re-styled calendar panel</b></summary>
+    </br>
+    The calendar panel on the home page has been re-styled for a simpler and more readable look.
+</details>
+
+<details>
+    <summary><b>Improved Starfish panel</b></summary>
+    </br>
+    The bloated Starfish panel on the home screen has been replaced with a compact collection of links to RIT's various services and webpages, including Starfish, SIS, Tiger Center, and eServices.
+</details>
+
 ## 💻 Installation
 
 myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project is still a work in progress. Fortunately, it's easy to install unofficial extensions:
