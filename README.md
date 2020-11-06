@@ -36,6 +36,12 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
     The bloated Starfish panel on the home screen has been replaced with a compact collection of links to RIT's various services and webpages, including Starfish, SIS, Tiger Center, and eServices.
 </details>
 
+<details>
+    <summary><b>Hide navigation menus</b></summary>
+    </br>
+    The navigation menu is full of links you may not use a lot such as "Starfish", "My Library", "Help", etc. A hide menu is now present that allows you to hide specific navigation menus site wide.
+</details>
+
 ## 💻 Installation
 
 myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project is still a work in progress. Fortunately, it's easy to install unofficial extensions:

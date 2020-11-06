@@ -20,6 +20,10 @@
       "css": ["calendar.css"]
     },
     {
+      "matches": ["https://mycourses.rit.edu/d2l/*"],
+      "js": ["hide_useless/hideNav.js"]
+    },
+    {
       "matches": [
         "https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list*"
       ],
