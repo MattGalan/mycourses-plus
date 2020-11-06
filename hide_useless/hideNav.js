@@ -5,7 +5,12 @@ function onPageLoadHideNavElements() {
     // Look up list of of navItemsToHide = ["Starfish", "Discussions", "Classlist", "Calendar"]
     chrome.storage.sync.get(["navItemsToHide"], (result) => {
         const { navItemsToHide } = result;
-    
+       
+        if (navItemsToHide == undefined) {
+            chrome.storage.sync.set({ navItemsToHide: [] });
+            return;
+        }
+
         navBar.children().each(function(i, navDiv) {
             var navText = navDiv.children[0].innerText
 
