@@ -2,12 +2,8 @@
   "name": "myCourses Plus",
   "version": "0.1",
   "description": "Enhancement suite for myCourses.",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["declarativeContent", "storage"],
   "options_page": "options.html",
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "content_scripts": [
     {
       "matches": ["https://mycourses.rit.edu/*"],
