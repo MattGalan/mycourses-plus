@@ -96,7 +96,7 @@ if (urlMatches?.length === 1) {
 
 // Add "save class" button if not already saved
 chrome.storage.sync.get(["savedClasses"], (result) => {
-  if (!result.savedClasses?.find((c) => c.id === classID)) {
+  if (classID && !result.savedClasses?.find((c) => c.id === classID)) {
     const { savedClasses } = result;
 
     // Construct class object
