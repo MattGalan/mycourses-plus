@@ -33,13 +33,13 @@ if (urlMatches?.length === 1) {
 }
 
 // Create custom nav bar
-const navPlus = document.createElement("div");
-navPlus.className = "mycourses-plus-nav";
+const quickBar = document.createElement("div");
+quickBar.className = "mcp-quick-bar";
 
 // Add MCP logo
 const logoElement = document.createElement("img");
 logoElement.src = chrome.extension.getURL("/images/get_started128.png");
-navPlus.appendChild(logoElement);
+quickBar.appendChild(logoElement);
 
 function createDropdownLink(name, href) {
   const newDropdownLink = document.createElement("a");
@@ -52,7 +52,7 @@ function createDropdownLink(name, href) {
 chrome.storage.sync.get(["savedClasses"], (result) => {
   result.savedClasses?.forEach((c) => {
     // prettier-ignore
-    $(navPlus).append(`
+    $(quickBar).append(`
       <div class="mcp-class">
         <a href="https://mycourses.rit.edu/d2l/home/${c.id}">${getPreferredCode(result.savedClasses, c, 2)}</a>
         <div class="mcp-class-dropdown">
@@ -134,19 +134,19 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     };
 
     // Inject "save class" button
-    navPlus.appendChild(saveClassButton);
+    quickBar.appendChild(saveClassButton);
   }
 });
 
-// Put navPlus in a container so it lines up with the real nav
-const navPlusContainer = document.createElement("div");
-navPlusContainer.className = "mcp-nav-container";
-navPlusContainer.appendChild(navPlus);
+// Put quickBar in a container so it lines up with the real nav
+const quickBarContainer = document.createElement("div");
+quickBarContainer.className = "mcp-quick-bar-container";
+quickBarContainer.appendChild(quickBar);
 
 // Inject custom nav bar
 const nav = document.querySelector("body > header > nav > d2l-navigation");
 nav.insertBefore(
-  navPlusContainer,
+  quickBarContainer,
   document.querySelector(
     "body > header > nav > d2l-navigation > d2l-navigation-main-footer"
   )

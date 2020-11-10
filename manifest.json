@@ -8,7 +8,7 @@
     {
       "matches": ["https://mycourses.rit.edu/*"],
       "js": ["jquery-3.5.1.min.js", "quickbar.js"],
-      "css": ["myCoursesPlus.css"]
+      "css": ["quickbar.css"]
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/home"],

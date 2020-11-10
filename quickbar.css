@@ -1,24 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
-.mcp-nav-container {
+.mcp-quick-bar-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   border-top: 1px solid rgba(124, 134, 149, 0.18);
 }
 
-.mycourses-plus-nav {
+.mcp-quick-bar {
   max-width: 1230px;
   width: 100%;
   box-sizing: border-box;
-  font-weight: bold;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   padding: 8px 30px;
 }
 
-.mycourses-plus-nav img {
+.mcp-quick-bar a {
+  color: #494c4e;
+  text-decoration: none;
+}
+
+.mcp-quick-bar img {
   height: 1em;
 }
 
