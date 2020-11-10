@@ -11,7 +11,7 @@ headerText = $(
 ).text();
 
 // Extract short and long codes from header
-const shortCode = headerText?.match(/^\w*\.\d*/)[0];
+const shortCode = headerText?.match(/^\w*\.\d*/)?.[0];
 const longCode = headerText?.match(/^(.*) -/)?.[1];
 
 function getPreferredCode(savedClasses, classObj, threshold) {
