@@ -1,9 +1,36 @@
-// Get class title
-const classTitle = document
-  .querySelector(
-    "body > header > nav > d2l-navigation > d2l-navigation-main-header > div.d2l-navigation-header-left > div.d2l-navigation-s-header-logo-area > div > a"
-  )
-  ?.textContent?.match(/^\w*\.\d*/)[0];
+/**
+ * Example:    SWEN.340.01S1 - SW Design for Computing Sys (SWEN34001S1.2201)
+ * Short code: SWEN.340
+ * Long code:  SWEN.340.01S1
+ * ID:         857634
+ */
+
+// Grab the text from the big class header on the page
+headerText = $(
+  "body > header > nav > d2l-navigation > d2l-navigation-main-header > div.d2l-navigation-header-left > div.d2l-navigation-s-header-logo-area > div > a"
+).text();
+
+// Extract short and long codes from header
+const shortCode = headerText?.match(/^\w*\.\d*/)[0];
+const longCode = headerText?.match(/^(.*) -/)?.[1];
+
+function getPreferredCode(savedClasses, classObj, threshold) {
+  return savedClasses.filter((c) => c.shortCode === classObj.shortCode)
+    .length >= threshold
+    ? classObj.longCode
+    : classObj.shortCode;
+}
+
+// Get class ID from URL
+let id;
+const urlMatches = location.href.match(/\d{6}/);
+if (urlMatches?.length === 1) {
+  // Only found one 6 digit number, so we know it's the class ID
+  id = urlMatches[0];
+} else if (urlMatches?.length > 1) {
+  // Found multiple 6 digit numbers, so we need to be more specific
+  id = location.href.match(/ou=(\d{6})/)[1];
+}
 
 // Create custom nav bar
 const navPlus = document.createElement("div");
@@ -23,99 +50,78 @@ function createDropdownLink(name, href) {
 
 // Inject class quick links
 chrome.storage.sync.get(["savedClasses"], (result) => {
-  result.savedClasses?.forEach((curClass) => {
-    const newClass = document.createElement("div");
-    newClass.className = "mcp-class";
+  result.savedClasses?.forEach((c) => {
+    // prettier-ignore
+    $(navPlus).append(`
+      <div class="mcp-class">
+        <a href="https://mycourses.rit.edu/d2l/home/${c.id}">${getPreferredCode(result.savedClasses, c, 2)}</a>
+        <div class="mcp-class-dropdown">
+          <div class="mcp-class-dropdown-content">
+            <a href="https://mycourses.rit.edu/d2l/le/content/${c.id}/Home">
+              Content
+            </a>
+            <a href="https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list.d2l?ou=${c.id}&isprv=0">
+              Assignments
+            </a>
+            <a href="https://mycourses.rit.edu/d2l/lms/quizzing/user/quizzes_list.d2l?ou=${c.id}">
+              Quizzes
+            </a>
+            <a href="https://mycourses.rit.edu/d2l/lms/grades/my_grades/main.d2l?ou=${c.id}">
+              Grades
+            </a>
+            <button class="mcp-class-remove">
+              Remove from quick bar
+            </button>
+          </div>
+        </div>
+      </div>
+    `);
+  });
+});
 
-    const newLink = document.createElement("a");
-    newLink.textContent = curClass.title;
-    newLink.href = `https://mycourses.rit.edu/d2l/home/${curClass.id}`;
-    newLink.className = "mcp-class-link";
+chrome.storage.sync.get(["savedClasses"], (result) => {
+  const { savedClasses } = result;
 
-    newDropdown = document.createElement("div");
-    newDropdown.className = "mcp-class-dropdown";
-
-    const newDropdownContent = document.createElement("div");
-    newDropdownContent.className = "mcp-class-dropdown-content";
-
-    newDropdownContent.appendChild(
-      createDropdownLink(
-        "Content",
-        `https://mycourses.rit.edu/d2l/le/content/${curClass.id}/Home`
-      )
-    );
-    newDropdownContent.appendChild(
-      createDropdownLink(
-        "Assignments",
-        `https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list.d2l?ou=${curClass.id}&isprv=0`
-      )
-    );
-    newDropdownContent.appendChild(
-      createDropdownLink(
-        "Quizzes",
-        `https://mycourses.rit.edu/d2l/lms/quizzing/user/quizzes_list.d2l?ou=${curClass.id}`
-      )
-    );
-    newDropdownContent.appendChild(
-      createDropdownLink(
-        "Grades",
-        `https://mycourses.rit.edu/d2l/lms/grades/my_grades/main.d2l?ou=${curClass.id}`
-      )
-    );
-
-    newUnsaveButton = document.createElement("button");
-    newUnsaveButton.textContent = "Remove from quick bar";
-    newUnsaveButton.onclick = () => {
+  $(".mcp-class-remove").each(function (index) {
+    this.onclick = () => {
       chrome.storage.sync.set({
-        savedClasses: result.savedClasses.filter(
-          (saved) => saved.id !== curClass.id
+        savedClasses: savedClasses.filter(
+          (saved) => saved.id !== savedClasses[index].id
         ),
       });
       location.reload();
       return false;
     };
-    newDropdownContent.appendChild(newUnsaveButton);
-
-    newDropdown.appendChild(newDropdownContent);
-    newClass.appendChild(newLink);
-    newClass.appendChild(newDropdown);
-    navPlus.appendChild(newClass);
   });
 });
 
-// Get class ID from URL
-let classID;
-const urlMatches = location.href.match(/\d{6}/);
-if (urlMatches?.length === 1) {
-  // Only found one 6 digit number, so we know it's the class ID
-  classID = urlMatches[0];
-} else if (urlMatches?.length > 1) {
-  // Found multiple 6 digit numbers, so we need to be more specific
-  classID = location.href.match(/ou=(\d{6})/)[1];
-}
-
 // Add "save class" button if not already saved
 chrome.storage.sync.get(["savedClasses"], (result) => {
-  if (classID && !result.savedClasses?.find((c) => c.id === classID)) {
+  if (id && !result.savedClasses?.find((c) => c.id === id)) {
     const { savedClasses } = result;
 
     // Construct class object
     const classObj = {
-      title: classTitle,
-      id: classID,
+      id,
+      shortCode,
+      longCode,
     };
 
     // Create button
     const saveClassButton = document.createElement("button");
     saveClassButton.className = "mcp-add-button";
-    saveClassButton.textContent = `Add ${classTitle} to quick bar`;
+    saveClassButton.textContent = `Add ${getPreferredCode(
+      savedClasses,
+      classObj,
+      1
+    )} to quick bar`;
 
     // Save class when button is clicked
     saveClassButton.onclick = () => {
       if (!savedClasses) {
         // No saved classes array
         chrome.storage.sync.set({ savedClasses: [classObj] });
-      } else if (!savedClasses.find((c) => c.title === classTitle)) {
+      } else if (!savedClasses.find((c) => c.id === id)) {
         // This class hasn't been saved
         chrome.storage.sync.set({
           savedClasses: [...savedClasses, classObj],
@@ -128,7 +134,7 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     };
 
     // Inject "save class" button
-    classTitle && navPlus.appendChild(saveClassButton);
+    navPlus.appendChild(saveClassButton);
   }
 });
 
