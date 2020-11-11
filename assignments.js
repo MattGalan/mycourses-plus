@@ -19,10 +19,13 @@ $(".dco.d2l-grades-score > div.dco_c").each(function (index) {
   const labels = $(this).children("label");
   let scoreObject = {};
 
-  if(this.textContent.includes("%")) {
+  if (this.textContent.includes("%")) {
     scoreObject.cleanedScore = this.textContent;
   } else {
-    scoreObject.cleanedScore = this.textContent.substring(0, this.textContent.length - 3);
+    scoreObject.cleanedScore = this.textContent.substring(
+      0,
+      this.textContent.length - 3
+    );
   }
 
   scoreObject.numerator = labels[0].textContent;
@@ -124,7 +127,6 @@ function renderTable() {
         ${renderTableHeader("Submissions")}
         ${renderTableHeader("Score")}
         ${renderTableHeader("Deadline")}
-        </th>
       </tr>
     </table>
   `);

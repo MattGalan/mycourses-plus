@@ -1,0 +1,33 @@
+.mcp-covid h2 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.mcp-covid table {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.mcp-covid th,
+.mcp-covid td {
+  font-weight: normal;
+  text-align: right;
+  font-size: 16px;
+}
+
+.mcp-covid td:first-child {
+  text-align: left;
+}
+
+.mcp-covid-reminder {
+  font-size: 14px;
+  line-height: 1em;
+  opacity: .66;
+}
+
+.mcp-covid-reminder a {
+  color: #006fbf !important;
+  text-decoration: underline;
+}

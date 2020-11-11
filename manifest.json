@@ -2,7 +2,11 @@
   "name": "myCourses Plus",
   "version": "0.1",
   "description": "Enhancement suite for myCourses.",
-  "permissions": ["declarativeContent", "storage"],
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "https://www.rit.edu/ready/dashboard"
+  ],
   "options_page": "options.html",
   "content_scripts": [
     {
@@ -12,8 +16,8 @@
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/home"],
-      "js": ["hide_useless/homepage.js", "calendar.js"],
-      "css": ["calendar.css"]
+      "js": ["hide_useless/homepage.js", "calendar.js", "covid.js"],
+      "css": ["calendar.css", "covid.css"]
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/*"],
@@ -27,6 +31,10 @@
       "css": ["assignments.css"]
     }
   ],
+  "background": {
+    "scripts": ["jquery-3.5.1.min.js", "background.js"],
+    "persistent": false
+  },
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
