@@ -42,6 +42,13 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
     The navigation menu is full of links you may not use a lot such as "Starfish", "My Library", "Help", etc. A hide menu is now present that allows you to hide specific navigation menus site wide.
 </details>
 
+<details>
+    <summary><b>RIT COVID-19 panel</b></summary>
+    </br>
+    myCourses Plus will scrape live data off of the RIT COVID-19 dashboard and display it in a small panel on your myCourses home page.
+    <img src="https://i.imgur.com/v3QXNCR.png" alt="COVID panel screenshot"/>
+</details>
+
 ## 💻 Installation
 
 myCourses Plus is not yet available on the Chrome Web Store, as publishing can take several weeks and the project is still a work in progress. Fortunately, it's easy to install unofficial extensions:
