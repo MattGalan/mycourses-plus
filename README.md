@@ -61,7 +61,9 @@ myCourses Plus is not yet available on the Chrome Web Store, as publishing can t
 
 1. Click the **LOAD UNPACKED** button and select the directory where you downloaded myCourses Plus.
 
-![](https://developer.chrome.com/static/images/get_started/load_extension.png)
+![Chrome extensions menu](https://developer.chrome.com/static/images/get_started/load_extension.png)
+
+**IMPORTANT**: Any time you pull the latest changes (which we encourage you to do often!), make sure you click that little refresh icon in the Chrome extensions menu (shown above).
 
 ## 🔨 Contribution
 
