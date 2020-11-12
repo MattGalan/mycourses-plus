@@ -50,6 +50,13 @@ function createDropdownLink(name, href) {
 
 // Inject class quick links
 chrome.storage.sync.get(["savedClasses"], (result) => {
+  // Display a custom message if we're on the home page and no classes have been saved
+  if (!shortCode && !result.savedClasses?.length) {
+    $(quickBar).append(
+      `<div class="mcp-quick-bar-first-time-msg">To add a class to the quick bar, visit a class page and click the button that appears here.</div>`
+    );
+  }
+
   result.savedClasses?.forEach((c) => {
     // prettier-ignore
     $(quickBar).append(`
@@ -79,9 +86,9 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
   });
 });
 
+// Hook up the "remove from quick bar" buttons
 chrome.storage.sync.get(["savedClasses"], (result) => {
   const { savedClasses } = result;
-
   $(".mcp-class-remove").each(function (index) {
     this.onclick = () => {
       chrome.storage.sync.set({

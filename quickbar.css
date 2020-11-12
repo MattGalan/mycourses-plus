@@ -26,6 +26,11 @@
   height: 1em;
 }
 
+.mcp-quick-bar-first-time-msg {
+  font-size: 16px;
+  margin-left: 20px;
+}
+
 .mcp-add-button {
   margin-left: 30px;
   padding: 4px 8px;
