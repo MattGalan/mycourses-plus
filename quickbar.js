@@ -15,7 +15,7 @@ const shortCode = headerText?.match(/^\w*\.\d*/)?.[0];
 const longCode = headerText?.match(/^(.*) -/)?.[1];
 
 function getPreferredCode(savedClasses, classObj, threshold) {
-  return savedClasses.filter((c) => c.shortCode === classObj.shortCode)
+  return savedClasses?.filter((c) => c.shortCode === classObj.shortCode)
     .length >= threshold
     ? classObj.longCode
     : classObj.shortCode;
