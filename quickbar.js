@@ -23,7 +23,7 @@ function getPreferredCode(savedClasses, classObj, threshold) {
 
 // Get class ID from URL
 let id;
-const urlMatches = location.href.match(/\d{6}/);
+const urlMatches = location.href.match(/\d{6}/g);
 if (urlMatches?.length === 1) {
   // Only found one 6 digit number, so we know it's the class ID
   id = urlMatches[0];
