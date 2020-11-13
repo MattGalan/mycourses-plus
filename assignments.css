@@ -4,12 +4,18 @@
 
 .mcp-assignments th,
 .mcp-assignments td {
-  border: 1px solid #cdd5dc;
+  border: 1px solid hsl(208, 18%, 83%);
   padding: 16px;
+  font-size: 16px;
 }
 
 .mcp-assignments td a {
   color: #006fbf;
+  text-decoration: none;
+}
+
+.mcp-assignments td a:hover {
+  text-decoration: underline;
 }
 
 .mcp-assignments th {
