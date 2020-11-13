@@ -14,6 +14,10 @@
   "content_scripts": [
     {
       "matches": ["https://mycourses.rit.edu/*"],
+      "exclude_matches": [
+        "https://mycourses.rit.edu/d2l/loginh/",
+        "https://mycourses.rit.edu/d2l/shibbolethSSO/lelogin.d2l"
+      ],
       "js": ["jquery-3.5.1.min.js", "quickbar.js"],
       "css": ["quickbar.css"]
     },
