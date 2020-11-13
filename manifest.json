@@ -7,7 +7,14 @@
     "storage",
     "https://www.rit.edu/ready/dashboard"
   ],
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+  "background": {
+    "scripts": ["jquery-3.5.1.min.js", "background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "matches": ["https://mycourses.rit.edu/*"],
@@ -16,25 +23,22 @@
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/home"],
-      "js": ["hide_useless/homepage.js", "calendar.js", "covid.js"],
+      "js": ["jquery-3.5.1.min.js", "hide_useless/homepage.js", "calendar.js", "covid.js"],
       "css": ["calendar.css", "covid.css"]
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/*"],
-      "js": ["hide_useless/hideNav.js"]
+      "js": ["jquery-3.5.1.min.js", "hide_useless/hideNav.js"]
     },
     {
       "matches": [
         "https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list*"
       ],
-      "js": ["assignments.js"],
+      "js": ["jquery-3.5.1.min.js", "assignments.js"],
       "css": ["assignments.css"]
     }
   ],
-  "background": {
-    "scripts": ["jquery-3.5.1.min.js", "background.js"],
-    "persistent": false
-  },
+
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
