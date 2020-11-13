@@ -5,6 +5,9 @@
   "permissions": [
     "declarativeContent",
     "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mycourses.rit.edu/*",
     "https://www.rit.edu/ready/dashboard"
   ],
   "options_ui": {
@@ -44,8 +47,11 @@
     }
   ],
   "background": {
-    "scripts": ["jquery-3.5.1.min.js", "background.js"],
-    "persistent": false
+    "scripts": [
+      "jquery-3.5.1.min.js",
+      "background.js",
+      "assignments_interceptor.js"
+    ]
   },
   "page_action": {
     "default_popup": "popup.html",
