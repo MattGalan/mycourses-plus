@@ -50,6 +50,13 @@ function createDropdownLink(name, href) {
 
 // Inject class quick links
 browser.storage.sync.get(["savedClasses"], (result) => {
+    // Display a custom message if we're on the home page and no classes have been saved
+    if (!shortCode && !result.savedClasses?.length) {
+      $(quickBar).append(
+        `<div class="mcp-quick-bar-first-time-msg">To add a class to the quick bar, visit a class page and click the button that appears here.</div>`
+      );
+    }
+  
   result.savedClasses?.forEach((c) => {
     // prettier-ignore
     $(quickBar).append(`
@@ -144,10 +151,10 @@ quickBarContainer.className = "mcp-quick-bar-container";
 quickBarContainer.appendChild(quickBar);
 
 // Inject custom nav bar
-const nav = document.querySelector("body > header > nav > d2l-navigation");
-nav.insertBefore(
-  quickBarContainer,
-  document.querySelector(
-    "body > header > nav > d2l-navigation > d2l-navigation-main-footer"
-  )
-);
+  const nav = document.querySelector("body > header > nav > d2l-navigation");
+  nav.insertBefore(
+    quickBarContainer,
+    document.querySelector(
+      "body > header > nav > d2l-navigation > d2l-navigation-main-footer"
+    )
+  );
