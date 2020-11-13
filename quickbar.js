@@ -144,7 +144,9 @@ quickBarContainer.className = "mcp-quick-bar-container";
 quickBarContainer.appendChild(quickBar);
 
 // Inject custom nav bar
-const nav = document.querySelector("body > header > nav > d2l-navigation");
+JQuery.ready(function(){
+  const nav = document.querySelector("body > header > nav > d2l-navigation");
+});
 nav.insertBefore(
   quickBarContainer,
   document.querySelector(
