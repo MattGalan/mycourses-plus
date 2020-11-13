@@ -5,11 +5,11 @@ function onPageLoadHideNavElements() {
   );
 
   // Look up list of of navItemsToHide = ["Starfish", "Discussions", "Classlist", "Calendar"]
-  chrome.storage.sync.get(["navItemsToHide"], (result) => {
+  browser.storage.sync.get(["navItemsToHide"], (result) => {
     const { navItemsToHide } = result;
 
     if (navItemsToHide == undefined) {
-      chrome.storage.sync.set({ navItemsToHide: [] });
+      browser.storage.sync.set({ navItemsToHide: [] });
       return;
     }
 
@@ -85,7 +85,7 @@ function injectHideMenu() {
 }
 
 function onClickToggleNavVisibility(navName) {
-  chrome.storage.sync.get(["navItemsToHide"], (result) => {
+  browser.storage.sync.get(["navItemsToHide"], (result) => {
     const { navItemsToHide } = result;
 
     const classObj = navName.replace(/\s/g, "");
@@ -94,9 +94,9 @@ function onClickToggleNavVisibility(navName) {
       // Hide nav item
       if (!navItemsToHide) {
         // If list is empty create new one with 1 entry.
-        chrome.storage.sync.set({ navItemsToHide: [classObj] });
+        browser.storage.sync.set({ navItemsToHide: [classObj] });
       } else {
-        chrome.storage.sync.set({
+        browser.storage.sync.set({
           // Add navName to navItemsToHide
           navItemsToHide: [...navItemsToHide, classObj],
         });
@@ -104,7 +104,7 @@ function onClickToggleNavVisibility(navName) {
     } else {
       // Remove nav item from navItemsToHide, as it now needs to be displayed
       navItemsToHide.remove(classObj);
-      chrome.storage.sync.set({ navItemsToHide: navItemsToHide });
+      browser.storage.sync.set({ navItemsToHide: navItemsToHide });
     }
 
     // Toggle the nav item locally so the user need not reload.

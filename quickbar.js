@@ -38,7 +38,7 @@ quickBar.className = "mcp-quick-bar";
 
 // Add MCP logo
 const logoElement = document.createElement("img");
-logoElement.src = chrome.extension.getURL("/images/get_started128.png");
+logoElement.src = browser.extension.getURL("/images/get_started128.png");
 quickBar.appendChild(logoElement);
 
 function createDropdownLink(name, href) {
@@ -49,7 +49,7 @@ function createDropdownLink(name, href) {
 }
 
 // Inject class quick links
-chrome.storage.sync.get(["savedClasses"], (result) => {
+browser.storage.sync.get(["savedClasses"], (result) => {
   result.savedClasses?.forEach((c) => {
     // prettier-ignore
     $(quickBar).append(`
@@ -79,12 +79,12 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
   });
 });
 
-chrome.storage.sync.get(["savedClasses"], (result) => {
+browser.storage.sync.get(["savedClasses"], (result) => {
   const { savedClasses } = result;
 
   $(".mcp-class-remove").each(function (index) {
     this.onclick = () => {
-      chrome.storage.sync.set({
+      browser.storage.sync.set({
         savedClasses: savedClasses.filter(
           (saved) => saved.id !== savedClasses[index].id
         ),
@@ -96,7 +96,7 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
 });
 
 // Add "save class" button if not already saved
-chrome.storage.sync.get(["savedClasses"], (result) => {
+browser.storage.sync.get(["savedClasses"], (result) => {
   if (id && !result.savedClasses?.find((c) => c.id === id)) {
     const { savedClasses } = result;
 
@@ -120,10 +120,10 @@ chrome.storage.sync.get(["savedClasses"], (result) => {
     saveClassButton.onclick = () => {
       if (!savedClasses) {
         // No saved classes array
-        chrome.storage.sync.set({ savedClasses: [classObj] });
+        browser.storage.sync.set({ savedClasses: [classObj] });
       } else if (!savedClasses.find((c) => c.id === id)) {
         // This class hasn't been saved
-        chrome.storage.sync.set({
+        browser.storage.sync.set({
           savedClasses: [...savedClasses, classObj],
         });
       }

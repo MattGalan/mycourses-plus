@@ -1,4 +1,4 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "covid") {
     $.ajax({
       url: "https://www.rit.edu/ready/dashboard",
