@@ -166,7 +166,9 @@ chrome.storage.sync.get(["hideSubmitted"], ({ hideSubmitted }) => {
   $("#hide-submitted")
     .prop("checked", hideSubmitted)
     .click(() => {
-      chrome.storage.sync.set({ hideSubmitted: !hideSubmitted });
+      chrome.storage.sync.set({
+        hideSubmitted: $("#hide-submitted").is(":checked"),
+      });
       renderTable();
     });
 
