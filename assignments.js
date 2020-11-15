@@ -4,6 +4,18 @@ function scrapeHref(el) {
   return $(el).find("a").attr("href");
 }
 
+const sortFns = {
+  name: (a, b) => a.name.localeCompare(b.name),
+  submissions: (a, b) => a.submission.localeCompare(b.submission),
+  score: (a, b) => {
+    // using localeCompare on text here results in the unscored entries in the wrong place
+    const aNumerator = a.score.numerator === "-" ? 0 : a.score.numerator;
+    const bNumerator = b.score.numerator === "-" ? 0 : b.score.numerator;
+    return bNumerator / b.score.denominator - aNumerator / a.score.denominator;
+  },
+  deadline: (a, b) => a.dateObj - b.dateObj,
+};
+
 // Scrape assignment names
 $(".d_ich").each(function () {
   assignments.push({
@@ -58,33 +70,11 @@ assignments.forEach((assignment, index) => {
 // Remove the yucky myCourses table
 $("#d_content_r_p").remove();
 
+// Initial sort values will be set in initialization down below
 let sortType = null;
 let reverseSort = false;
 
-function nameHeaderClicked() {
-  headerClicked("name", (a, b) => a.name.localeCompare(b.name));
-}
-
-function submissionsHeaderClicked() {
-  headerClicked("submissions", (a, b) =>
-    a.submission.localeCompare(b.submission)
-  );
-}
-
-// using localeCompare on text here results in the unscored entries in the wrong place
-function scoreHeaderClicked() {
-  headerClicked("score", (a, b) => {
-    const aNumerator = a.score.numerator === "-" ? 0 : a.score.numerator;
-    const bNumerator = b.score.numerator === "-" ? 0 : b.score.numerator;
-    return bNumerator / b.score.denominator - aNumerator / a.score.denominator;
-  });
-}
-
-function deadlineHeaderClicked() {
-  headerClicked("deadline", (a, b) => a.dateObj - b.dateObj);
-}
-
-function headerClicked(type, sortFn) {
+function headerClicked(type) {
   if (sortType === type) {
     reverseSort = !reverseSort;
   } else {
@@ -92,8 +82,13 @@ function headerClicked(type, sortFn) {
     reverseSort = false;
   }
 
-  assignments.sort(sortFn);
+  assignments.sort(sortFns[type]);
   reverseSort && assignments.reverse();
+
+  chrome.storage.sync.set({
+    assignmentSortType: sortType,
+    assignmentReverseSort: reverseSort,
+  });
 
   renderTable();
 }
@@ -132,10 +127,10 @@ function renderTable() {
   `);
 
   // Add click handlers to table headers
-  $("#mcp-name-header").click(nameHeaderClicked);
-  $("#mcp-submissions-header").click(submissionsHeaderClicked);
-  $("#mcp-score-header").click(scoreHeaderClicked);
-  $("#mcp-deadline-header").click(deadlineHeaderClicked);
+  $("#mcp-name-header").click(() => headerClicked("name"));
+  $("#mcp-submissions-header").click(() => headerClicked("submissions"));
+  $("#mcp-score-header").click(() => headerClicked("score"));
+  $("#mcp-deadline-header").click(() => headerClicked("deadline"));
 
   // Hide submitted assignments, if appropriate
   const filteredAssignments = $("#hide-submitted").is(":checked")
@@ -155,23 +150,32 @@ function renderTable() {
   );
 }
 
-chrome.storage.sync.get(["hideSubmitted"], ({ hideSubmitted }) => {
-  // Inject "Hide submitted" toggle
-  $("#d_content_r > div > ul > li").prepend(`
-    <input class="toggle" type="checkbox" id="hide-submitted"/>
-    <label for="hide-submitted">Hide submitted</label>
-  `);
+chrome.storage.sync.get(
+  ["hideSubmitted", "assignmentSortType", "assignmentReverseSort"],
+  ({ hideSubmitted, assignmentSortType, assignmentReverseSort }) => {
+    // Inject "Hide submitted" toggle
+    $("#d_content_r > div > ul > li").prepend(`
+      <input class="toggle" type="checkbox" id="hide-submitted"/>
+      <label for="hide-submitted">Hide submitted</label>
+    `);
 
-  // When it's clicked, toggle the value in storage and re-render table
-  $("#hide-submitted")
-    .prop("checked", hideSubmitted)
-    .click(() => {
-      chrome.storage.sync.set({
-        hideSubmitted: $("#hide-submitted").is(":checked"),
+    // When it's clicked, toggle the value in storage and re-render table
+    $("#hide-submitted")
+      .prop("checked", hideSubmitted)
+      .click(() => {
+        chrome.storage.sync.set({
+          hideSubmitted: $("#hide-submitted").is(":checked"),
+        });
+        renderTable();
       });
-      renderTable();
-    });
 
-  // Initial table render
-  renderTable();
-});
+    // Remember previous sort configuration
+    sortType = assignmentSortType;
+    reverseSort = assignmentReverseSort;
+    assignments.sort(sortFns[sortType]);
+    reverseSort && assignments.reverse();
+
+    // Initial table render
+    renderTable();
+  }
+);
