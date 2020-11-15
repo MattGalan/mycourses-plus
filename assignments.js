@@ -137,19 +137,39 @@ function renderTable() {
   $("#mcp-score-header").click(scoreHeaderClicked);
   $("#mcp-deadline-header").click(deadlineHeaderClicked);
 
+  // Hide submitted assignments, if appropriate
+  const filteredAssignments = $("#hide-submitted").is(":checked")
+    ? assignments.filter((a) => !a.submission.includes("Submission"))
+    : assignments;
+
   // Populate table
-  assignments.forEach((a) =>
+  filteredAssignments.forEach((a) =>
     $(".mcp-assignments").append(`
-    <tr>
-      ${renderLink(a.name, a.descriptionHref)}
-      ${renderLink(a.submission, a.submissionHistoryHref)}
-      ${renderLink(a.score.cleanedScore, a.feedbackHref)}
-      <td>${a.deadline}</td>
-    </tr>
-  `)
+      <tr>
+        ${renderLink(a.name, a.descriptionHref)}
+        ${renderLink(a.submission, a.submissionHistoryHref)}
+        ${renderLink(a.score.cleanedScore, a.feedbackHref)}
+        <td>${a.deadline}</td>
+      </tr>
+    `)
   );
 }
 
-renderTable();
+chrome.storage.sync.get(["hideSubmitted"], ({ hideSubmitted }) => {
+  // Inject "Hide submitted" toggle
+  $("#d_content_r > div > ul > li").prepend(`
+    <input class="toggle" type="checkbox" id="hide-submitted"/>
+    <label for="hide-submitted">Hide submitted</label>
+  `);
 
-console.log(assignments);
+  // When it's clicked, toggle the value in storage and re-render table
+  $("#hide-submitted")
+    .prop("checked", hideSubmitted)
+    .click(() => {
+      chrome.storage.sync.set({ hideSubmitted: !hideSubmitted });
+      renderTable();
+    });
+
+  // Initial table render
+  renderTable();
+});

@@ -1,3 +1,5 @@
+/* Courtesy of Dan Klammer https://danklammer.com/articles/simple-css-toggle-switch/ */
+
 .mcp-assignments {
   width: 100%;
 }
@@ -36,4 +38,19 @@
 .mcp-sort-arrow.reverse {
   border-top: none;
   border-bottom: 8px solid black;
+}
+
+/* Center the control strip above the table */
+#d_content_r > div > ul > li {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+#d_content_r > div > ul > li label {
+  margin: 4px 0 0 16px;
+}
+
+#d_content_r > div > ul > li .d2l-button {
+  margin: 0 0 0 auto;
 }
