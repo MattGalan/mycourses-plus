@@ -21,7 +21,7 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
 <details>
     <summary><b>New assignments table</b></summary>
     </br>
-    The assignments table has been overhauled to allow you to sort by name, submission status, and due date.
+    The assignments table has been overhauled to allow you to sort by name, submission status, and due date. You can also hide your submitted assignments with the click of a button.
 </details>
 
 <details>
