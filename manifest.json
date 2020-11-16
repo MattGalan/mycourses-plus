@@ -43,7 +43,7 @@
         "https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list*"
       ],
       "js": ["jquery-3.5.1.min.js", "assignments.js"],
-      "css": ["assignments.css"]
+      "css": ["assignments.css", "toggle_switch.css"]
     }
   ],
   "background": {
