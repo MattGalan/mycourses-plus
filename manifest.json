@@ -49,8 +49,7 @@
   "background": {
     "scripts": [
       "jquery-3.5.1.min.js",
-      "background.js",
-      "assignments_interceptor.js"
+      "background.js"
     ]
   },
   "page_action": {
