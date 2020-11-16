@@ -85,7 +85,7 @@ function headerClicked(type) {
   assignments.sort(sortFns[type]);
   reverseSort && assignments.reverse();
 
-  chrome.storage.sync.set({
+  browser.storage.sync.set({
     assignmentSortType: sortType,
     assignmentReverseSort: reverseSort,
   });
@@ -150,7 +150,7 @@ function renderTable() {
   );
 }
 
-chrome.storage.sync.get(
+browser.storage.sync.get(
   ["hideSubmitted", "assignmentSortType", "assignmentReverseSort"],
   ({ hideSubmitted, assignmentSortType, assignmentReverseSort }) => {
     // Inject "Hide submitted" toggle
@@ -163,7 +163,7 @@ chrome.storage.sync.get(
     $("#hide-submitted")
       .prop("checked", hideSubmitted)
       .click(() => {
-        chrome.storage.sync.set({
+        browser.storage.sync.set({
           hideSubmitted: $("#hide-submitted").is(":checked"),
         });
         renderTable();

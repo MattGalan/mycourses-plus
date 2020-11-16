@@ -3,8 +3,8 @@ Intercepts the primary network request for the assignments page,
 and redirects it to ensure we're always requesting 200 assignments
 per page.
 */
-
-chrome.webRequest.onBeforeRequest.addListener(
+//Does not work in firefox *WHY*
+browser.webRequest.onBeforeRequest.addListener(
   function (info) {
     const decodedUrl = decodeURIComponent(info.url);
 
