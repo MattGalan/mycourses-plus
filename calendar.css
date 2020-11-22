@@ -1,25 +1,25 @@
-/* These are miscellaneous stylings to strip away some
-of the cruft on the calendar widget on the home page. */
-
-.d2l-collapsepane-content {
-  border: none !important;
+.mcp-event-group h3 {
+  font-size: 16px;
+  margin-top: 16px;
 }
 
-.d2l-datalist-item-content .d2l-inline:first-child {
-  margin-left: 12px !important;
+.mcp-event {
+  font-size: 16px;
+  margin-top: 16px;
 }
 
-.d2l-datalist-item-content .d2l-inline:nth-child(2) {
-  width: 75% !important;
+.mcp-event img {
+  vertical-align: middle;
+  opacity: .66;
+  margin: 0 8px 0 2px;
 }
 
-.homepage-col-4 .d2l-homepage-heading-link .d2l-heading.vui-heading-4 {
-  margin: 20px 0 0 20px;
+.mcp-event-header {
+  font-weight: bold;
 }
 
-.homepage-col-4 .d2l-widget-content-padding {
-  padding: 0;
-  margin-top: -20px;
+.mcp-event-title {
+  margin-left: 40px;
 }
 
 /* Below is the styling for the RIT links widget, just below

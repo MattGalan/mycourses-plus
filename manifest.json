@@ -38,6 +38,7 @@
     "scripts": [
       "jquery-3.5.1.min.js",
       "background.js",
+      "calendar_background.js",
       "assignments_interceptor.js"
     ]
   },
@@ -57,5 +58,12 @@
     "128": "images/get_started128.png"
   },
   "manifest_version": 2,
-  "web_accessible_resources": ["images/get_started128.png"]
+  "web_accessible_resources": [
+    "images/get_started128.png",
+    "images/book-open.svg",
+    "images/feather.svg",
+    "images/life-buoy.svg",
+    "images/radio.svg",
+    "images/video.svg"
+  ]
 }
