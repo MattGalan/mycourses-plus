@@ -56,6 +56,24 @@ function getEventTypeAndTitle(title) {
   };
 }
 
+/**
+ * Removes redudant AMs and PMs.
+ *
+ * 12:30 PM             ->  12:30 PM
+ * 1:25 PM - 2:25 PM    ->  1:25 - 2:25 PM
+ * 10:15 AM - 11:45 AM  ->  10:15 - 11:45 AM
+ * 11:00 AM - 2:00 PM   ->  11:00 AM - 2:00 PM
+ */
+function removeRedundantPM(time) {
+  const matches = time.match(/( [A,P]M)/g);
+  if (matches.length === 2 && matches[0] === matches[1]) {
+    const index = time.indexOf(matches[0]);
+    return time.slice(0, index) + time.slice(index + 3);
+  }
+
+  return time;
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // We'll only handle "calendar" requests
   if (request.type !== "calendar") {
@@ -95,7 +113,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 newGroup.events.push({
                   ...getEventTypeAndTitle(title),
                   course: $(this).find(".d2l-le-calendar-dot-name").text(),
-                  time: $($(this).find(".d2l-textblock")[0]).text(),
+                  time: removeRedundantPM(
+                    $($(this).find(".d2l-textblock")[0]).text()
+                  ),
                 });
               });
 
