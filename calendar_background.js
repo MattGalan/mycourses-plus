@@ -28,20 +28,32 @@ function getSemanticDate(date) {
   return daysOfWeek[date.getDay()];
 }
 
-function getEventType(title) {
+function getEventTypeAndTitle(title) {
   if (title.includes(" - Due")) {
-    return "assignment";
+    return {
+      type: "assignment",
+      title: title.slice(0, -6),
+    };
   }
 
   if (title.includes(" - Availability Ends")) {
-    return "quiz";
+    return {
+      type: "quiz",
+      title: title.slice(0, -20),
+    };
   }
 
   if (title.toLowerCase().includes("office hour")) {
-    return "office";
+    return {
+      type: "office",
+      title,
+    };
   }
 
-  return "lecture";
+  return {
+    type: "lecture",
+    title,
+  };
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -81,8 +93,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 // For each assignment...
                 const title = $(this).find("h3").text();
                 newGroup.events.push({
-                  title,
-                  type: getEventType(title),
+                  ...getEventTypeAndTitle(title),
                   course: $(this).find(".d2l-le-calendar-dot-name").text(),
                   time: $($(this).find(".d2l-textblock")[0]).text(),
                 });
