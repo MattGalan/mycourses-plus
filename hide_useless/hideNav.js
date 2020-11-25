@@ -64,17 +64,17 @@ function injectHideMenu() {
       // Create id to query later on.
       var id = "hide-menu-" + navText.replace(/\s/g, "");
 
-      // Create menu item and append to hide menu.
-      var menuItemHtml =
-        '<d2l-menu-item text="' +
-        navText +
-        '" class="d2l-navigation-s-menu-item-root" id="' +
-        id +
-        '" role="menuitem" tabindex="0" aria-disabled="false" first="true"></d2l-menu-item>';
-
-      var menuObj = document.createElement("d2l-menu-item");
-      menuObj.innerHTML = menuItemHtml;
-      $("#hide-menu").append(menuObj.firstChild);
+      $("#hide-menu").append(`
+        <d2l-menu-item
+          text="${navText}"
+          class="d2l-navigation-s-menu-item-root"
+          id="${id}"
+          role="menuitem"
+          tabindex="0"
+          aria-disabled="false"
+          first="true"
+        />
+      `);
 
       // Register click handler.
       $("#" + id).click(function () {
