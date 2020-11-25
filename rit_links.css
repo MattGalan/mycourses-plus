@@ -11,4 +11,6 @@ body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-mai
   text-decoration: underline;
   display: block;
   margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5em;
 }

@@ -3,10 +3,8 @@ chrome.runtime.sendMessage({ type: "covid" }, function (response) {
     "body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-main-padding > div.d2l-homepage > div > div.homepage-row > div > div.homepage-col-4"
   ).prepend(`
     <div class="mcp-covid d2l-widget d2l-tile">
-      <h2>
-        <span>COVID-19</span>
-        <span>${response.level}</span>
-      </h2>
+      <h2>COVID-19</h2>
+      <p>${response.level}</p>
       <table>
         <tr>
           <th></th>
