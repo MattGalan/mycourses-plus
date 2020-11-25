@@ -1,24 +1,37 @@
 .mcp-event-group h3 {
   font-size: 16px;
-  margin-top: 16px;
+  margin: 8px 0;
 }
 
 .mcp-event {
+  display: block;
   font-size: 16px;
-  margin-top: 16px;
+  padding: 8px 20px;
+  margin: 0 -20px;
+}
+
+.mcp-event:hover {
+  background: #f7690221;
+}
+
+.mcp-event:hover img {
+  transform: rotate(-10deg) scale(.95);
 }
 
 .mcp-event img {
   vertical-align: middle;
   opacity: .66;
   margin: 0 8px 0 2px;
+  transition: transform .5s;
 }
 
 .mcp-event-header {
+  display: block;
   font-weight: bold;
 }
 
 .mcp-event-title {
+  display: block;
   margin-left: 40px;
   line-height: 1.33em;
 }

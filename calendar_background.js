@@ -31,27 +31,27 @@ function getSemanticDate(date) {
 function getEventTypeAndTitle(title) {
   if (title.includes(" - Due")) {
     return {
-      type: "assignment",
+      type: "Assignment",
       title: title.slice(0, -6),
     };
   }
 
   if (title.includes(" - Availability Ends")) {
     return {
-      type: "quiz",
+      type: "Quiz",
       title: title.slice(0, -20),
     };
   }
 
   if (title.toLowerCase().includes("office hour")) {
     return {
-      type: "office",
+      type: "Office Hours",
       title,
     };
   }
 
   return {
-    type: "lecture",
+    type: "Lecture",
     title,
   };
 }
@@ -72,6 +72,22 @@ function removeRedundantPM(time) {
   }
 
   return time;
+}
+
+// Extracts the href from an event
+// myCourses makes this more complicated than it needs to be
+function extractHref(element) {
+  const anchors = $(element).find("a");
+
+  if (anchors.length === 1) {
+    // The href is hidden in a template, so we have to do some voodoo
+    return $($(element).find("template").prop("content"))
+      .find("a")
+      .attr("href");
+  }
+
+  // Otherwise it's pretty simple
+  return $(anchors[1]).attr("href");
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -109,13 +125,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               .find("li")
               .each(function () {
                 // For each assignment...
-                const title = $(this).find("h3").text();
                 newGroup.events.push({
-                  ...getEventTypeAndTitle(title),
+                  ...getEventTypeAndTitle($(this).find("h3").text()),
                   course: $(this).find(".d2l-le-calendar-dot-name").text(),
                   time: removeRedundantPM(
                     $($(this).find(".d2l-textblock")[0]).text()
                   ),
+                  href: extractHref(this),
                 });
               });
 
