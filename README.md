@@ -7,15 +7,11 @@ myCourses Plus is a **work in progress** browser extension enhancement suite for
 myCourses Plus is packed with features to streamline your workflows and enhance your experience. All features will be configurable in the future. Screenshots coming soon!
 
 <details>
-    <summary><b>Hide useless panels</b></summary>
-    </br>
-    Several useless panels are hidden on the home page, including the "Locker / Help" bar, "User Links" panel, and "Instructions to Find Your Courses" panel.
-</details>
-
-<details>
     <summary><b>Quick navigation bar</b></summary>
     </br>
-    Jump from the assignments page for one class to the grades page for another class in a single click.
+    The quick bar allows you to navigate myCourses like never before, and is present on most myCourses pages. Jump from the assignments page for one class to the grades page for another class in a single click!
+    </br>
+    <img src="https://i.imgur.com/WH4EZUz.png" alt="Quick bar screenshot"/>
 </details>
 
 <details>
@@ -25,21 +21,29 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
 </details>
 
 <details>
-    <summary><b>Re-styled calendar panel</b></summary>
+    <summary><b>New "Upcoming Events" panel</b></summary>
     </br>
-    The calendar panel on the home page has been re-styled for a simpler and more readable look.
+    The calendar panel on the home page has been reimagined into a "Upcoming Events" panel. This panel scrapes data behind the scenes from the myCourses "Calendar" page, meaning you'll always see the assignments, quizzes, and more for the next seven days.
+    </br>
+    <img src="https://i.imgur.com/Rf2DwlV.png" alt="Upcoming events panel screenshot"/>
+    </br>
+    Each event is represented by an icon for easier recognition. The book icon represents assignments, the life buoy represents office hours, the video icon represents lecures, and the quill represents quizzes.
 </details>
 
 <details>
     <summary><b>Improved Starfish panel</b></summary>
     </br>
     The bloated Starfish panel on the home screen has been replaced with a compact collection of links to RIT's various services and webpages, including Starfish, SIS, Tiger Center, and eServices.
+    </br>
+    <img src="https://i.imgur.com/Inulw7c.png" alt="Improved Starfish panel screenshot"/>
 </details>
 
 <details>
     <summary><b>Hide navigation menus</b></summary>
     </br>
     The navigation menu is full of links you may not use a lot such as "Starfish", "My Library", "Help", etc. A hide menu is now present that allows you to hide specific navigation menus site wide.
+    </br>
+    <img src="https://user-images.githubusercontent.com/20482179/100189103-9c3cf480-2eb9-11eb-9d8a-e9c2f3369be7.png" alt="Hide navigation menus screenshot"/>
 </details>
 
 <details>
@@ -47,6 +51,12 @@ myCourses Plus is packed with features to streamline your workflows and enhance 
     </br>
     myCourses Plus will scrape live data off of the RIT COVID-19 dashboard and display it in a small panel on your myCourses home page.
     <img src="https://i.imgur.com/v3QXNCR.png" alt="COVID panel screenshot"/>
+</details>
+
+<details>
+    <summary><b>Hide useless panels</b></summary>
+    </br>
+    Several useless panels are hidden on the home page, including the "Locker / Help" bar, "User Links" panel, and "Instructions to Find Your Courses" panel.
 </details>
 
 ## 💻 Installation
