@@ -29,7 +29,8 @@
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/*"],
-      "js": ["hide_useless/hideNav.js"]
+      "js": ["hide_useless/hideNav.js"],
+      "css": ["hide_useless/hideNav.css"]
     },
     {
       "matches": [
