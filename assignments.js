@@ -110,6 +110,13 @@ function renderLink(text, href) {
   return `<td>${contents}</td>`;
 }
 
+function renderNameColumn(a) {
+    const contents = a.descriptionHref ? `<a href=${a.descriptionHref}>${a.name}</>` : `<span>${a.name}</span>`;
+    const groupImage = a.group ? `<img class="mcp-svg-image" src=${chrome.extension.getURL("/images/group.svg")}>` : ``;
+    const turnItInImage = a.turnItIn ? `<img class="mcp-svg-image" src=${chrome.extension.getURL("/images/turnitin.svg")}>` : ``;
+    return `<td>${contents}${groupImage}${turnItInImage}</td>>`;
+}
+
 function renderTable() {
   // Remove existing MCP table
   $(".mcp-assignments").remove();
@@ -141,7 +148,7 @@ function renderTable() {
   filteredAssignments.forEach((a) =>
     $(".mcp-assignments").append(`
       <tr>
-        ${renderLink(a.name, a.descriptionHref)}
+        ${renderNameColumn(a)}
         ${renderLink(a.submission, a.submissionHistoryHref)}
         ${renderLink(a.score.cleanedScore, a.feedbackHref)}
         <td>${a.deadline}</td>

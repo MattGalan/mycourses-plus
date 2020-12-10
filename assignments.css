@@ -54,3 +54,7 @@
 #d_content_r > div > ul > li .d2l-button {
   margin: 0 0 0 auto;
 }
+
+.mcp-svg-image {
+  padding-left: 10px;
+}
