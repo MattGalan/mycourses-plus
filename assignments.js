@@ -19,7 +19,7 @@ const sortFns = {
 // Scrape assignment names
 $(".d_ich").each(function () {
   assignments.push({
-    name: this.textContent,
+    name: this.textContent.replaceAll('\n', '<br/>'),
     descriptionHref: scrapeHref(this),
     group: $(this).find(".di_i").length === 1,
     turnItIn: $(this).find(".d2l-image").length === 1,
