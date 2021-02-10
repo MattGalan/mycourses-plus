@@ -17,7 +17,7 @@ browser.webRequest.onBeforeRequest.addListener(
   },
   // filters
   {
-    urls: ["https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list.d2l*"],
+    urls: ["https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list.d2l"],
     types: ["main_frame"],
   },
   // extraInfoSpec
