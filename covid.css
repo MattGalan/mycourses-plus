@@ -2,12 +2,17 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+}
+
+.mcp-covid p {
+  margin: 8px 0 0 0 !important;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .mcp-covid table {
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0 10px 0;
 }
 
 .mcp-covid th,

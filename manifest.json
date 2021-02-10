@@ -27,16 +27,18 @@
     {
       "matches": ["https://mycourses.rit.edu/d2l/home"],
       "js": [
-        "jquery-3.5.1.min.js",
         "hide_useless/homepage.js",
+        "jquery-3.5.1.min.js",
         "calendar.js",
-        "covid.js"
+        "covid.js",
+        "rit_links.js"
       ],
-      "css": ["calendar.css", "covid.css"]
+      "css": ["calendar.css", "covid.css", "rit_links.css"]
     },
     {
       "matches": ["https://mycourses.rit.edu/d2l/*"],
-      "js": ["jquery-3.5.1.min.js", "hide_useless/hideNav.js"]
+      "js": ["hide_useless/hideNav.js"],
+      "css": ["hide_useless/hideNav.css"]
     },
     {
       "matches": [
@@ -49,7 +51,9 @@
   "background": {
     "scripts": [
       "jquery-3.5.1.min.js",
-      "background.js"
+      "background.js",
+      "calendar_background.js",
+      "assignments_interceptor.js"
     ]
   },
   "page_action": {
@@ -68,11 +72,19 @@
     "128": "images/get_started128.png"
   },
   "manifest_version": 2,
-  "web_accessible_resources": ["images/get_started128.png"],
   "browser_specific_settings": {
     "gecko": {
       "id": "mycoursesplus@fake.edu",
       "strict_min_version": "42a1"
-    }
-  }
+    },
+  "web_accessible_resources": [
+    "images/get_started128.png",
+    "images/book-open.svg",
+    "images/feather.svg",
+    "images/life-buoy.svg",
+    "images/radio.svg",
+    "images/video.svg",
+    "images/turnitin.svg",
+    "images/group.svg"
+  ]
 }

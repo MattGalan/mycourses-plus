@@ -57,30 +57,38 @@ function injectHideMenu() {
   var navBar = $(
     "body > header > nav > d2l-navigation > d2l-navigation-main-footer > div > div"
   );
-  navBar.children().each(function (i, navDiv) {
-    var navText = navDiv.children[0].innerText;
 
-    if (!excludedNavBars.includes(navText)) {
-      // Create id to query later on.
-      var id = "hide-menu-" + navText.replace(/\s/g, "");
+  chrome.storage.sync.get(["navItemsToHide"], ({ navItemsToHide }) => {
+    navBar.children().each(function (i, navDiv) {
+      var navText = navDiv.children[0].innerText;
+      const strippedNavText = navText.replace(/\s/g, "");
 
-      // Create menu item and append to hide menu.
-      var menuItemHtml =
-        '<d2l-menu-item text="' +
-        navText +
-        '" class="d2l-navigation-s-menu-item-root" id="' +
-        id +
-        '" role="menuitem" tabindex="0" aria-disabled="false" first="true"></d2l-menu-item>';
+      if (!excludedNavBars.includes(navText)) {
+        // Create id to query later on.
+        var id = `hide-menu-${strippedNavText}`;
 
-      var menuObj = document.createElement("d2l-menu-item");
-      menuObj.innerHTML = menuItemHtml;
-      $("#hide-menu").append(menuObj.firstChild);
+        const hiddenClass = navItemsToHide.includes(strippedNavText)
+          ? " mcp-hidden-nav-item"
+          : "";
 
-      // Register click handler.
-      $("#" + id).click(function () {
-        onClickToggleNavVisibility(navText);
-      });
-    }
+        $("#hide-menu").append(`
+          <d2l-menu-item
+            text="${navText}"
+            class="d2l-navigation-s-menu-item-root${hiddenClass}"
+            id="${id}"
+            role="menuitem"
+            tabindex="0"
+            aria-disabled="false"
+            first="true"
+          />
+        `);
+
+        // Register click handler.
+        $("#" + id).click(function () {
+          onClickToggleNavVisibility(navText);
+        });
+      }
+    });
   });
 }
 
@@ -101,10 +109,16 @@ function onClickToggleNavVisibility(navName) {
           navItemsToHide: [...navItemsToHide, classObj],
         });
       }
+
+      // Add hidden indicator in dropdown
+      $(`#hide-menu-${classObj}`).addClass("mcp-hidden-nav-item");
     } else {
       // Remove nav item from navItemsToHide, as it now needs to be displayed
       navItemsToHide.remove(classObj);
       browser.storage.sync.set({ navItemsToHide: navItemsToHide });
+
+      // Remove hidden indicator in dropdown
+      $(`#hide-menu-${classObj}`).removeClass("mcp-hidden-nav-item");
     }
 
     // Toggle the nav item locally so the user need not reload.

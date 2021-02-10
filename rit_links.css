@@ -1,0 +1,16 @@
+/* For some reason, the top padding of the widget we hijack
+for the RIT links is 15px. We want it at 20px to be consistent
+with our modified calendar widget. */
+body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-main-padding > div.d2l-homepage > div > div.homepage-row > div > div.homepage-col-4 > div.d2l-widget.d2l-tile.d2l-custom-widget {
+  padding: 20px;
+}
+
+/* Adding link styling to the RIT links widget */
+body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-main-padding > div.d2l-homepage > div > div.homepage-row > div > div.homepage-col-4 > div.d2l-widget.d2l-tile.d2l-custom-widget a {
+  color: #006fbf;
+  text-decoration: underline;
+  display: block;
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5em;
+}

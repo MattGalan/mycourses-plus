@@ -1,43 +1,37 @@
-/* These are miscellaneous stylings to strip away some
-of the cruft on the calendar widget on the home page. */
-
-.d2l-collapsepane-content {
-  border: none !important;
+.mcp-event-group h3 {
+  font-size: 16px;
+  margin: 8px 0;
 }
 
-.d2l-datalist-item-content .d2l-inline:first-child {
-  margin-left: 12px !important;
-}
-
-.d2l-datalist-item-content .d2l-inline:nth-child(2) {
-  width: 75% !important;
-}
-
-.homepage-col-4 .d2l-homepage-heading-link .d2l-heading.vui-heading-4 {
-  margin: 20px 0 0 20px;
-}
-
-.homepage-col-4 .d2l-widget-content-padding {
-  padding: 0;
-  margin-top: -20px;
-}
-
-/* Below is the styling for the RIT links widget, just below
-the calendar widget on the home page. There's probably a better
-place to put this, but it's fine here for now. */
-
-/* For some reason, the top padding of the widget we hijack
-for the RIT links is 15px. We want it at 20px to be consistent
-with our modified calendar widget. */
-body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-main-padding > div.d2l-homepage > div > div.homepage-row > div > div.homepage-col-4 > div.d2l-widget.d2l-tile.d2l-custom-widget {
-  padding: 20px;
-}
-
-/* Adding link styling to the RIT links widget */
-body > div.d2l-page-main.d2l-max-width.d2l-min-width.d2l-home > div.d2l-page-main-padding > div.d2l-homepage > div > div.homepage-row > div > div.homepage-col-4 > div.d2l-widget.d2l-tile.d2l-custom-widget a {
-  color: #006fbf;
-  text-decoration: underline;
+.mcp-event {
   display: block;
-  margin-top: 8px;
+  font-size: 16px;
+  padding: 8px 20px;
+  margin: 0 -20px;
 }
 
+.mcp-event:hover {
+  background: #f7690221;
+}
+
+.mcp-event:hover img {
+  transform: rotate(-10deg) scale(.95);
+}
+
+.mcp-event img {
+  vertical-align: middle;
+  opacity: .66;
+  margin: 0 8px 0 2px;
+  transition: transform .5s;
+}
+
+.mcp-event-header {
+  display: block;
+  font-weight: bold;
+}
+
+.mcp-event-title {
+  display: block;
+  margin-left: 40px;
+  line-height: 1.33em;
+}
