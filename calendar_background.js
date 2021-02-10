@@ -117,7 +117,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
           .each(function () {
             // For each event group...
             const newGroup = {
-              date: getSemanticDate(new Date($(this).find("h2").text())),
+              date: $(this).find("h2").text(),//getSemanticDate(new Date($(this).find("h2").text())),
               events: [],
             };
 
