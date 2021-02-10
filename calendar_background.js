@@ -90,7 +90,7 @@ function extractHref(element) {
   return $(anchors[1]).attr("href");
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // We'll only handle "calendar" requests
   if (request.type !== "calendar") {
     return;

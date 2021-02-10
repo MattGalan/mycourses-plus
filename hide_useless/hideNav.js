@@ -58,7 +58,7 @@ function injectHideMenu() {
     "body > header > nav > d2l-navigation > d2l-navigation-main-footer > div > div"
   );
 
-  chrome.storage.sync.get(["navItemsToHide"], ({ navItemsToHide }) => {
+  browser.storage.sync.get(["navItemsToHide"], ({ navItemsToHide }) => {
     navBar.children().each(function (i, navDiv) {
       var navText = navDiv.children[0].innerText;
       const strippedNavText = navText.replace(/\s/g, "");

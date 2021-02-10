@@ -112,8 +112,8 @@ function renderLink(text, href) {
 
 function renderNameColumn(a) {
     const contents = a.descriptionHref ? `<a href=${a.descriptionHref}>${a.name}</>` : `<span>${a.name}</span>`;
-    const groupImage = a.group ? `<img class="mcp-svg-image" src=${chrome.extension.getURL("/images/group.svg")}>` : ``;
-    const turnItInImage = a.turnItIn ? `<img class="mcp-svg-image" src=${chrome.extension.getURL("/images/turnitin.svg")}>` : ``;
+    const groupImage = a.group ? `<img class="mcp-svg-image" src=${browser.runtime.getURL("/images/group.svg")}>` : ``;
+    const turnItInImage = a.turnItIn ? `<img class="mcp-svg-image" src=${browser.runtime.getURL("/images/turnitin.svg")}>` : ``;
     return `<td>${contents}${groupImage}${turnItInImage}</td>>`;
 }
 

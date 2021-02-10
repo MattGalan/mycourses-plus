@@ -3,7 +3,6 @@
   "version": "0.1",
   "description": "Enhancement suite for myCourses.",
   "permissions": [
-    "declarativeContent",
     "storage",
     "webRequest",
     "webRequestBlocking",
@@ -16,16 +15,25 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://mycourses.rit.edu/*"],
+      "matches": [
+        "https://mycourses.rit.edu/*"
+      ],
       "exclude_matches": [
         "https://mycourses.rit.edu/d2l/loginh/",
         "https://mycourses.rit.edu/d2l/shibbolethSSO/lelogin.d2l"
       ],
-      "js": ["jquery-3.5.1.min.js", "quickbar.js"],
-      "css": ["quickbar.css"]
+      "js": [
+        "jquery-3.5.1.min.js",
+        "quickbar.js"
+      ],
+      "css": [
+        "quickbar.css"
+      ]
     },
     {
-      "matches": ["https://mycourses.rit.edu/d2l/home"],
+      "matches": [
+        "https://mycourses.rit.edu/d2l/home"
+      ],
       "js": [
         "hide_useless/homepage.js",
         "jquery-3.5.1.min.js",
@@ -33,19 +41,35 @@
         "covid.js",
         "rit_links.js"
       ],
-      "css": ["calendar.css", "covid.css", "rit_links.css"]
+      "css": [
+        "calendar.css",
+        "covid.css",
+        "rit_links.css"
+      ]
     },
     {
-      "matches": ["https://mycourses.rit.edu/d2l/*"],
-      "js": ["hide_useless/hideNav.js"],
-      "css": ["hide_useless/hideNav.css"]
+      "matches": [
+        "https://mycourses.rit.edu/d2l/*"
+      ],
+      "js": [
+        "hide_useless/hideNav.js"
+      ],
+      "css": [
+        "hide_useless/hideNav.css"
+      ]
     },
     {
       "matches": [
         "https://mycourses.rit.edu/d2l/lms/dropbox/user/folders_list*"
       ],
-      "js": ["jquery-3.5.1.min.js", "assignments.js"],
-      "css": ["assignments.css", "toggle_switch.css"]
+      "js": [
+        "jquery-3.5.1.min.js",
+        "assignments.js"
+      ],
+      "css": [
+        "assignments.css",
+        "toggle_switch.css"
+      ]
     }
   ],
   "background": {
@@ -77,14 +101,15 @@
       "id": "mycoursesplus@fake.edu",
       "strict_min_version": "42a1"
     },
-  "web_accessible_resources": [
-    "images/get_started128.png",
-    "images/book-open.svg",
-    "images/feather.svg",
-    "images/life-buoy.svg",
-    "images/radio.svg",
-    "images/video.svg",
-    "images/turnitin.svg",
-    "images/group.svg"
-  ]
+    "web_accessible_resources": [
+      "images/get_started128.png",
+      "images/book-open.svg",
+      "images/feather.svg",
+      "images/life-buoy.svg",
+      "images/radio.svg",
+      "images/video.svg",
+      "images/turnitin.svg",
+      "images/group.svg"
+    ]
+  }
 }

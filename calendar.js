@@ -3,13 +3,13 @@ $(
 ).html("<h2>Upcoming Events</h2><div>Loading events...</div>");
 
 const eventIcons = {
-  Assignment: chrome.extension.getURL("/images/book-open.svg"),
-  Quiz: chrome.extension.getURL("/images/feather.svg"),
-  "Office Hours": chrome.extension.getURL("/images/life-buoy.svg"),
-  Lecture: chrome.extension.getURL("/images/video.svg"),
+  Assignment: browser.runtime.getURL("/images/book-open.svg"),
+  Quiz: browser.runtime.getURL("/images/feather.svg"),
+  "Office Hours": browser.runtime.getURL("/images/life-buoy.svg"),
+  Lecture: browser.runtime.getURL("/images/video.svg"),
 };
 
-chrome.runtime.sendMessage(
+browser.runtime.sendMessage(
   { type: "calendar", token: localStorage["XSRF.Token"] },
   function (response) {
     const container = $(
