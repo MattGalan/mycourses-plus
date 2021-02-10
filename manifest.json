@@ -100,16 +100,16 @@
     "gecko": {
       "id": "mycoursesplus@fake.edu",
       "strict_min_version": "42a1"
-    },
-    "web_accessible_resources": [
-      "images/get_started128.png",
-      "images/book-open.svg",
-      "images/feather.svg",
-      "images/life-buoy.svg",
-      "images/radio.svg",
-      "images/video.svg",
-      "images/turnitin.svg",
-      "images/group.svg"
-    ]
-  }
+    }
+  },
+  "web_accessible_resources": [
+    "images/get_started128.png",
+    "images/book-open.svg",
+    "images/feather.svg",
+    "images/life-buoy.svg",
+    "images/radio.svg",
+    "images/video.svg",
+    "images/turnitin.svg",
+    "images/group.svg"
+  ]
 }
