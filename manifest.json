@@ -99,7 +99,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "mycoursesplus@fake.edu",
-      "strict_min_version": "42a1"
+      "strict_min_version": "61.0"
     }
   },
   "web_accessible_resources": [

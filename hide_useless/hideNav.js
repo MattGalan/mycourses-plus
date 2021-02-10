@@ -28,24 +28,22 @@ function injectHideMenu() {
   // Create empty skeleton of hide menu.
   var hideDivNavMenu = document.createElement("div");
 
-  var html =
-    '<div class="d2l-navigation-s-item" role="listitem">' +
-    "<d2l-dropdown>" +
-    '<button class="d2l-navigation-s-group d2l-dropdown-opener" aria-haspopup="true" aria-expanded="false">' +
-    '<span class="d2l-navigation-s-group-wrapper">' +
-    '<span class="d2l-navigation-s-group-text">' +
-    "Hide" +
-    "</span>" +
-    '<d2l-icon icon="d2l-tier1:chevron-down" dir="ltr"></d2l-icon>' +
-    "</span>" +
-    "</button>" +
-    '<d2l-dropdown-menu render-content="render-content" dir="ltr" no-auto-focus="" no-padding="" dropdown-content="" id="hide-menu">' +
-    '<d2l-menu label="Hide" class="d2l-menu-mvc" active="" aria-label="Hide" role="menu">' +
-    "</d2l-menu>" +
-    "</d2l-dropdown-menu></d2l-dropdown>" +
-    "</div>";
-
-  hideDivNavMenu.innerHTML = html;
+  hideDivNavMenu.innerHTML = 
+  '<div class="d2l-navigation-s-item" role="listitem">' +
+  "<d2l-dropdown>" +
+  '<button class="d2l-navigation-s-group d2l-dropdown-opener" aria-haspopup="true" aria-expanded="false">' +
+  '<span class="d2l-navigation-s-group-wrapper">' +
+  '<span class="d2l-navigation-s-group-text">' +
+  "Hide" +
+  "</span>" +
+  '<d2l-icon icon="d2l-tier1:chevron-down" dir="ltr"></d2l-icon>' +
+  "</span>" +
+  "</button>" +
+  '<d2l-dropdown-menu render-content="render-content" dir="ltr" no-auto-focus="" no-padding="" dropdown-content="" id="hide-menu">' +
+  '<d2l-menu label="Hide" class="d2l-menu-mvc" active="" aria-label="Hide" role="menu">' +
+  "</d2l-menu>" +
+  "</d2l-dropdown-menu></d2l-dropdown>" +
+  "</div>";
 
   // Add hide menu to beginning of the nav menu.
   $(".d2l-navigation-s-main-wrapper")?.[0]?.prepend(hideDivNavMenu.firstChild);
