@@ -116,8 +116,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           .find("div > div > .d2l-collapsepane")
           .each(function () {
             // For each event group...
+            const dateText = $(this).find("h2").text()
             const newGroup = {
-              date: getSemanticDate(new Date($(this).find("h2").text())),
+              date: dateText.substring(0, dateText.length - 6),
               events: [],
             };
 
